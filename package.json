@@ -1,0 +1,47 @@
+{
+  "name": "abode.ly_booking_module",
+  "version": "1.0.0",
+  "description": "Component as-a-Service that handles date selection, price calculation, and reservation booking.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./server/index.js",
+    "build": "webpack",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abode-ly/booking_module.git"
+  },
+  "author": "RamKhalsa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abode-ly/booking_module/issues"
+  },
+  "homepage": "https://github.com/abode-ly/booking_module#readme",
+  "dependencies": {
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-redux": "^6.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "express": "^4.16.4",
+    "jest": "^24.5.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10",
+    "redux-devtools": "^3.5.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  }
+}
