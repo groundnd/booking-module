@@ -5,6 +5,5 @@ const BookingModule = props => (
   <div id="Booking_Mod">Hello World</div>
   );
 
-ReactDOM.render(<BookingModule />, document.getElementById('booking-module'));
 
 export default BookingModule;
