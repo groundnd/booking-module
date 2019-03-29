@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './client/src/BookingModule.jsx',
+  entry: './client/src/index.js',
   module: {
     rules: [
       {
