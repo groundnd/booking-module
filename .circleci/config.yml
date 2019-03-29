@@ -7,6 +7,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:8.15
+      - image: circleci/mysql:5.7
     
     working_directory: ~/repo
 
@@ -14,4 +15,5 @@ jobs:
       - checkout
       - run: "npm install"
       - run: "npm run build"
+      - run: "npm run seed"
       - run: "npm run test"

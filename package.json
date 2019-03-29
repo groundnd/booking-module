@@ -7,6 +7,7 @@
     "start": "nodemon ./server/index.js",
     "build": "webpack",
     "build:watch": "webpack --watch",
+    "seed": "node database/seed.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors"
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/abode-ly/booking_module#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "faker": "^4.1.0",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.5",
     "react": "^16.8.5",
