@@ -46,7 +46,7 @@ const generateAccommodationData = () => {
     const newAccData = {
       price_per_day: faker.finance.amount(60, 300, 2),
       cleaning_fee: faker.finance.amount(20, 80, 2),
-      accomodations_tax: faker.finance.amount(0, 0.1, 2),
+      accommodations_tax: faker.finance.amount(0, 0.1, 2),
       general_tax: faker.finance.amount(0, 0.05, 2),
       rating_score: getRating(),
       number_of_ratings: faker.random.number({ min: 0, max: 1000 }),
