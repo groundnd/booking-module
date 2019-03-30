@@ -1,9 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReportListing from './ReportListing';
+import BookingContainer from './BookingContainer';
 
 const BookingModule = props => (
-  <div id="Booking_Mod">Hello World</div>
+  <div id="bm-top-margin">
+    <div id="bm-parent-container">
+      <BookingContainer />
+      <ReportListing />
+    </div>
+  </div>
   );
-
 
 export default BookingModule;

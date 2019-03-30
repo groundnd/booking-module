@@ -50,7 +50,7 @@ const generateAccommodationData = () => {
       general_tax: faker.finance.amount(0, 0.05, 2),
       rating_score: getRating(),
       number_of_ratings: faker.random.number({ min: 0, max: 1000 }),
-      max_guests: faker.random.number({ min: 1, max: 11 } ),
+      max_guests: faker.random.number({ min: 1, max: 11 }),
       number_viewing_listing: faker.random.number({ min: 0, max: 600 }),
       availability_last_updated: faker.date.between('2019-01-01', '2019-03-28'),
     };
@@ -92,7 +92,7 @@ const generateReservationsData = () => {
   for (let i = 0; i < 30000; i += 1) {
     const resData = {
       date: faker.date.between('2019-04-01', '2022-01-01'),
-      accommodation_id: faker.random.number({ min: 1, max: 100}),
+      accommodation_id: faker.random.number({ min: 1, max: 100 }),
       guest_id: faker.random.number({ min: 1, max: 100}),
       total_adults: faker.random.number({ min: 2, max: 5 }),
       total_children: faker.random.number({ min: 2, max: 5 }),
