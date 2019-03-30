@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const pw = require('./config/sequelize.config');
+const pw = require('./config/sequelize.config') || null;
 
 
 const db = new Sequelize('bookings', 'root', pw.rootPW, {
