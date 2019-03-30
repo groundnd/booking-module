@@ -107,7 +107,7 @@ const generateReservationsData = () => {
 db.drop();
 db.sync({ force: true, match: /bookings$/ })
   .then(() => Models.Guest.bulkCreate(generateGuestData()))
-  .then(() => Models.Accomodation.bulkCreate(generateAccommodationData()))
+  .then(() => Models.Accommodation.bulkCreate(generateAccommodationData()))
   .then(() => Models.Reservation.bulkCreate(generateReservationsData(), { ignoreDuplicates: true }))
   .then(() => console.log('Seeded Database successfully'))
   .catch(err => (
