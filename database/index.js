@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const pw = process.env.MYSQL_ROOT_PASSWORD || require('./config/sequelize.config').rootPW;
+const pw = process.env.MYSQL_ROOT_PW || require('./config/sequelize.config').rootPW;
 
 const databaseName = process.env.MYSQL_DATABASE || 'bookings';
 
