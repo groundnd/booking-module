@@ -8,6 +8,9 @@ jobs:
     docker:
       - image: circleci/node:8.15
       - image: circleci/mysql:5.7
+        environment: 
+          MYSQL_DATABASE: 'bookings'
+          MYSQL_RANDOM_ROOT_PASSWORD: yes
     
     working_directory: ~/repo
 
