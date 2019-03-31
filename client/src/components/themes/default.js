@@ -2,7 +2,7 @@
 const theme = {};
 
 theme.palette = {
-  primary: ['#FF5A5F', '#006a70', '#006c70', '#008489', '#757575', '#d8d8d8', '#edf6f6'],
+  primary: ['#FF5A5F', '#006a70', '#006c70', '#008489', '#757575', '#d8d8d8', '#99ede6', '#edf6f6'],
   svg: ['#008489'],
   background: ['#FFFFFF'],
 

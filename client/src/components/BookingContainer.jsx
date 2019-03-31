@@ -19,17 +19,15 @@ const Spacer = styled.div`
   margin-bottom: 24px;
 `;
 
-const BookingContainer = props => {
-  return (
-    <BookingBox>
-      <Spacer>
-        <div id="bm-booking-content">
-          <PriceReview />
-          <BookingForm />
-        </div>
-      </Spacer>
-    </BookingBox>
-  )
-}
+const BookingContainer = props => (
+  <BookingBox>
+    <Spacer>
+      <div id="bm-booking-content">
+        <PriceReview />
+        <BookingForm />
+      </div>
+    </Spacer>
+  </BookingBox>
+);
 
 export default BookingContainer;

@@ -20,17 +20,20 @@ class BookingModule extends Component {
     }
   }
 
-  async getBookingInfo() {
-    const response = await fetch(`/bookings/${this.state.accommodationid}/reserve`);
-    const data = await response.json();
-    this.setState({
-      data: data
-    });
-  }
 
   componentDidMount() {
     this.getBookingInfo.call(this);
   }
+
+  async getBookingInfo() {
+    const { accommodationid } = this.state;
+    const response = await fetch(`/bookings/${accommodationid}/reserve`);
+    const data = await response.json();
+    this.setState({
+      data: data,
+    });
+  }
+
   
   render () {
     return (
