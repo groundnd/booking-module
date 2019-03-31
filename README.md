@@ -1,6 +1,6 @@
 # booking_module
 
-The booking component provides a user-friendly experience to browsing the availability of an accomodation, including:
+The booking component provides a user-friendly experience to browsing the availability of an accommodation, including:
   - Overall Price
   - Itemized Price Breakout
   - Guest handling (number and type)
