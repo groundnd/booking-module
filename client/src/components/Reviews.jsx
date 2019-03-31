@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Stars from './Stars';
 import styled from 'styled-components';
 import theme from './themes/default';
+
+const ReviewContainer = styled.div`
+
+`;
 
 const ReviewLabel = styled.span`
   font-family: ${theme.fonts.primary};
@@ -11,12 +15,14 @@ const ReviewLabel = styled.span`
   color: ${theme.fonts.color};
 `;
 
+
 const Reviews = props => {
   return (
-    <div id="bm-reviews-container">
+    // to-do: wrap stars and review label in button to allow navigation on-screen
+    <ReviewContainer>
         <Stars />
         <ReviewLabel> 155 </ReviewLabel>
-    </div>
+    </ReviewContainer>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PriceReview from './PriceReviews';
 import styled from 'styled-components';
 import theme from './themes/default';
@@ -13,14 +13,19 @@ const BookingBox = styled.div`
   border-color: ${theme.borders.color};
 `
 
+const Spacer = styled.div`
+  margin-top: 16px;
+  margin-bottom: 24px;
+`;
+
 const BookingContainer = props => {
   return (
     <BookingBox>
-      <div id="bm-booking-container-margin">
+      <Spacer>
         <div id="bm-booking-content">
           <PriceReview />
         </div>
-      </div>
+      </Spacer>
     </BookingBox>
   )
 }
