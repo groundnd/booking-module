@@ -10,9 +10,9 @@ const ReviewContainer = styled.div`
 const ReviewLabel = styled.span`
   font-family: ${theme.fonts.primary};
   font-weight: 600;
-  font-size: ${theme.fonts.size[2]};
+  font-size: ${theme.fonts.size[3]};
   line-height: ${theme.fonts.lineHeight[1]};
-  color: ${theme.fonts.color};
+  color: ${theme.fonts.color[0]};
 `;
 
 
