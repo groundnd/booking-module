@@ -34,6 +34,13 @@ const ChargeNotice = styled.span`
   color: ${theme.fonts.color[0]};
   line-height: ${theme.fonts.lineHeight[1]};
   text-align: center;
+  font-family: ${theme.fonts.primary};
+`;
+
+const DropDownContainer = styled.div`
+  display: block;
+  z-index: 2;
+  width: 100%;
 `;
 
 
@@ -43,9 +50,11 @@ const BookingForm = props => (
       <CheckOutContainer>
         <Dates />
         <Guests />
-        <GuestDropdown />
+        <DropDownContainer>
+          <GuestDropdown />
+        </DropDownContainer>
+        <Button>Book</Button>
       </CheckOutContainer>
-      <Button>Book</Button>
       <ChargeContainer>
         <ChargeNotice>You won&apos;t be charged yet</ChargeNotice>
       </ChargeContainer>

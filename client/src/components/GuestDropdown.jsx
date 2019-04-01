@@ -2,17 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
 
-// Note: Will re-factor after initial front-end buildout. Candidate for sub-components.
+// eslint-disable-next-line max-len
+// Note: Will re-factor after initial front-end buildout. Candidate for sub-components. Also fix absolute positioning to work more cleanly.
 
 const DropdownContainer = styled.div`
-  width: 100%;
-  padding: 16px;
+  width: 356px;
+  padding: 0px 16px;
   border-radius: 3px;
   display: flex;
   flex-flow: row wrap;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
   min-width: 280px;
   z-index: 2;
+  position: absolute;
+  background-color: ${theme.palette.background};
 `;
 
 const AdultsContainer = styled.div`

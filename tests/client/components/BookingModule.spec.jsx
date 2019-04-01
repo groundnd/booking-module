@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import '@babel/polyfill';
 
-//Components
+// Components
 import BookingModule from '../../../client/src/components/BookingModule';
 
 
@@ -11,6 +12,6 @@ describe('Booking Module', () => {
   console.log(wrapper.text());
 
   test('should exist', () => {
-    expect(wrapper.text()).toEqual('<BookingContainer /><ReportListing />');
+    expect(wrapper.text()).toEqual('<GlobalStyleComponent /><BookingContainer /><ReportListing />');
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
-import PriceReview from './PriceReviews';
 import styled from 'styled-components';
+import PriceReview from './PriceReviews';
 import theme from './themes/default';
 import BookingForm from './BookingForm';
 
@@ -12,7 +12,7 @@ const BookingBox = styled.div`
   border-width: ${theme.borders.width};
   border-style: ${theme.borders.style};
   border-color: ${theme.borders.color};
-`
+`;
 
 const Spacer = styled.div`
   margin-top: 16px;

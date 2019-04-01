@@ -1,6 +1,6 @@
 import React from 'react';
-import Stars from './Stars';
 import styled from 'styled-components';
+import Stars from './Stars';
 import theme from './themes/default';
 
 const ReviewContainer = styled.div`
@@ -16,14 +16,12 @@ const ReviewLabel = styled.span`
 `;
 
 
-const Reviews = props => {
-  return (
-    // to-do: wrap stars and review label in button to allow navigation on-screen
-    <ReviewContainer>
-        <Stars />
-        <ReviewLabel> 155 </ReviewLabel>
-    </ReviewContainer>
-  )
-}
+const Reviews = props => (
+  // to-do: wrap stars and review label in button to allow navigation on-screen
+  <ReviewContainer>
+    <Stars />
+    <ReviewLabel> 155 </ReviewLabel>
+  </ReviewContainer>
+);
 
 export default Reviews;
