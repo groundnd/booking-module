@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import theme from './themes/default';
 
 const GuestContainer = styled.div`
-  margin-bottom: 16px
+  width: 100%;
+  // Tech debt: may need margin when dropdown not rendered;
 `;
 
 const GuestLabel = styled.label`
@@ -26,6 +27,7 @@ const GuestButton = styled.button`
   justify-content: space-around;
   width: 100%;
   height: 40px;
+  // Tech debt: update border to 2 px on bottom when clicked (and remove when collapsed)
 `;
 
 const GuestArrow = styled.svg`
@@ -38,6 +40,19 @@ const GuestTextContainer = styled.div`
   display: flex;
   flex-flow: row no-wrap;
   justify-content; center;
+`;
+
+const GuestHighlighter = styled.span`
+  height: 22px;
+
+  // Tech debt: update on state implementation to add on-click effect;
+  &:focus {
+    padding: 4.25px 8.5px;
+    border-radius: 3px;
+    background-color: ${theme.palette.primary[6]};
+    outline: none;
+  }
+
 `;
 
 const GuestText = styled.span`
@@ -54,8 +69,12 @@ const Guests = props => (
     <GuestLabel>Guests</GuestLabel>
     <GuestButton>
       <GuestTextContainer>
-        <GuestText>5 Guests,</GuestText>
-        <GuestText>2 Infants</GuestText>
+        <GuestHighlighter className="bm-highlighter">
+          <GuestText>5 Guests,</GuestText>
+        </GuestHighlighter>
+        <GuestHighlighter className="bm-highlighter">
+          <GuestText> 2 Infants</GuestText>
+        </GuestHighlighter>
       </GuestTextContainer>
       <GuestArrow viewBox="0 0 18 18">
         <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />

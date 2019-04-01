@@ -1,7 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import PriceLabel from './PriceLabel';
 import Reviews from './Reviews';
-import styled from 'styled-components';
 import theme from './themes/default';
 
 const LineBreak = styled.div`
@@ -9,14 +9,12 @@ const LineBreak = styled.div`
   border-bottom: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
 `;
 
-const PriceReview = props => {
-  return (
-    <div id="bm-price-review-container">
-      <PriceLabel />
-      <Reviews />
-      <LineBreak />
-    </div>
-  )
-}
+const PriceReview = props => (
+  <div id="bm-price-review-container">
+    <PriceLabel />
+    <Reviews />
+    <LineBreak />
+  </div>
+);
 
 export default PriceReview;

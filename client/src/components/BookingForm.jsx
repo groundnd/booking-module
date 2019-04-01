@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import theme from './themes/default';
 import Dates from './Dates';
 import Guests from './Guests';
+import GuestDropdown from './GuestDropdown';
+
+const CheckOutContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+`;
 
 const Button = styled.button`
   font-size: ${theme.fonts.size[1]};
@@ -34,10 +40,11 @@ const ChargeNotice = styled.span`
 const BookingForm = props => (
   <div id="bm-booking-form-container">
     <form id="bm-booking-form">
-      <div id="bm-checkout-container">
+      <CheckOutContainer>
         <Dates />
         <Guests />
-      </div>
+        <GuestDropdown />
+      </CheckOutContainer>
       <Button>Book</Button>
       <ChargeContainer>
         <ChargeNotice>You won&apos;t be charged yet</ChargeNotice>

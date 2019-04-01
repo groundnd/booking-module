@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import theme from './themes/default';
 
 const DateMargin = styled.div`
+  width: 100%;
   margin-top: 16px;
   margin-bottom: 8px;
 `;

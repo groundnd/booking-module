@@ -18,13 +18,11 @@ const PerNight = styled.span`
   color: ${theme.fonts.color[0]};
 `;
 
-const PriceLabel = props => {
-  return (
-    <div id="bm-price-label-container">
-      <Price>$45</Price>
-      <PerNight> per night</PerNight>
-    </div>
-  )
-}
+const PriceLabel = props => (
+  <div id="bm-price-label-container">
+    <Price>$45</Price>
+    <PerNight> per night</PerNight>
+  </div>
+);
 
 export default PriceLabel;

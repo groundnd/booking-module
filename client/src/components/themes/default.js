@@ -19,7 +19,7 @@ theme.borders = {
   color: '#e4e4e4',
   width: '1px',
   style: 'solid',
-}
+};
 
 
 export default theme;

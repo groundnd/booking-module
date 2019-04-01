@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import { createGlobalStyle } from 'styled-components';
 import ReportListing from './ReportListing';
 import BookingContainer from './BookingContainer';
-import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   body {
     @import url('./themes)
     font-family: 'Circular'
   }
-  `
+  `;
 
 class BookingModule extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class BookingModule extends Component {
     this.state = {
       accommodationid: Math.floor(Math.random() * 100),
       data: {},
-    }
+    };
   }
 
 
@@ -30,12 +30,11 @@ class BookingModule extends Component {
     const response = await fetch(`/bookings/${accommodationid}/reserve`);
     const data = await response.json();
     this.setState({
-      data: data,
+      data,
     });
   }
 
-  
-  render () {
+  render() {
     return (
       <div id="bm-top-margin">
         <div id="bm-parent-container">
@@ -44,8 +43,8 @@ class BookingModule extends Component {
           <ReportListing />
         </div>
       </div>
-      );
+    );
   }
-} 
+}
 
 export default BookingModule;
