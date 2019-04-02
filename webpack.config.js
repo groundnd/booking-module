@@ -1,12 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: './client/src/index.js',
+  entry: ['@babel/polyfill', './client/src/index.js'],
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /mode_modules/,
+        exclude: /node_modules/,
         use: ['babel-loader'],
       },
       {

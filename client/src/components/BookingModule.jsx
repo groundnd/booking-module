@@ -1,14 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { createGlobalStyle } from 'styled-components';
 import ReportListing from './ReportListing';
 import BookingContainer from './BookingContainer';
 
-const BookingModule = props => (
-  <div id="bm-top-margin">
-    <div id="bm-parent-container">
-      <BookingContainer />
-      <ReportListing />
-    </div>
-  </div>
-  );
+const GlobalStyles = createGlobalStyle`
+  body {
+    @import url('./themes)
+    font-family: 'Circular'
+  }
+  `;
+
+class BookingModule extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      accommodationid: Math.floor(Math.random() * 100),
+      data: {},
+    };
+  }
+
+
+  componentDidMount() {
+    this.getBookingInfo.call(this);
+  }
+
+  async getBookingInfo() {
+    const { accommodationid } = this.state;
+    const response = await fetch(`/bookings/${accommodationid}/reserve`);
+    const data = await response.json();
+    this.setState({
+      data,
+    });
+  }
+
+  render() {
+    return (
+      <div id="bm-top-margin">
+        <div id="bm-parent-container">
+          <GlobalStyles />
+          <BookingContainer />
+          <ReportListing />
+        </div>
+      </div>
+    );
+  }
+}
 
 export default BookingModule;

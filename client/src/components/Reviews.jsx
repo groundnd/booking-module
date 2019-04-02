@@ -1,13 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import Stars from './Stars';
+import theme from './themes/default';
 
-const Reviews = props => {
-  return (
-    <div id="bm-reviews-container">
-        <Stars />
-        <span id="bm-stars-label"> 155 </span>
-    </div>
-  )
-}
+const ReviewContainer = styled.div`
+// ToDO: Complete CSS here or repurpose to normal div
+`;
+
+const ReviewLabel = styled.span`
+  font-family: ${theme.fonts.primary};
+  font-weight: 600;
+  font-size: ${theme.fonts.size[3]};
+  line-height: ${theme.fonts.lineHeight[1]};
+  color: ${theme.fonts.color[0]};
+`;
+
+
+const Reviews = () => (
+  // to-do: wrap stars and review label in button to allow navigation on-screen
+  <ReviewContainer>
+    <Stars />
+    <ReviewLabel> 155 </ReviewLabel>
+  </ReviewContainer>
+);
 
 export default Reviews;
