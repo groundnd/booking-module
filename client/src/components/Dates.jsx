@@ -18,7 +18,7 @@ const DateLabel = styled.label`
 const DateContainer = styled.div`
   padding-left: 12px;
   padding-right: 12px;
-  background-color: rgb(255, 255, 255);
+  background-color: ${theme.palette.background};
   margin: 0px;
   border-width: ${theme.borders.width};
   border-style: ${theme.borders.style};

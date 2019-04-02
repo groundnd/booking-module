@@ -4,7 +4,7 @@ import Stars from './Stars';
 import theme from './themes/default';
 
 const ReviewContainer = styled.div`
-
+// ToDO: Complete CSS here or repurpose to normal div
 `;
 
 const ReviewLabel = styled.span`
@@ -16,7 +16,7 @@ const ReviewLabel = styled.span`
 `;
 
 
-const Reviews = props => (
+const Reviews = () => (
   // to-do: wrap stars and review label in button to allow navigation on-screen
   <ReviewContainer>
     <Stars />

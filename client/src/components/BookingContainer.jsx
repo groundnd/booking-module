@@ -7,7 +7,7 @@ import BookingForm from './BookingForm';
 const BookingBox = styled.div`
   padding-left: 24px;
   padding-right: 24px;
-  background-color: rgb(255, 255, 255);
+  background-color: ${theme.palette.background};
   margin: 0px;
   border-width: ${theme.borders.width};
   border-style: ${theme.borders.style};
@@ -19,7 +19,7 @@ const Spacer = styled.div`
   margin-bottom: 24px;
 `;
 
-const BookingContainer = props => (
+const BookingContainer = () => (
   <BookingBox>
     <Spacer>
       <div id="bm-booking-content">

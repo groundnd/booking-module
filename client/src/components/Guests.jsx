@@ -17,7 +17,7 @@ const GuestLabel = styled.label`
 const GuestButton = styled.button`
   padding-left: 12px;
   padding-right: 12px;
-  background-color: rgb(255, 255, 255);
+  background-color: ${theme.palette.background};
   margin: 0px;
   border-width: ${theme.borders.width};
   border-style: ${theme.borders.style};
@@ -64,7 +64,7 @@ const GuestText = styled.span`
   font-family: ${theme.fonts.primary};
 `;
 
-const Guests = props => (
+const Guests = () => (
   <GuestContainer>
     <GuestLabel>Guests</GuestLabel>
     <GuestButton>

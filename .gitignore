@@ -2,3 +2,4 @@ node_modules
 .eslintrc.js
 database/config
 webpack.config.js
+BookingModule.bundle.js
