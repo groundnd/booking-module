@@ -99,7 +99,7 @@ const CloseButton = styled.button`
   }
 `;
 
-const GuestDropdown = props => (
+const GuestDropdown = () => (
   <DropdownContainer>
     <AdultsContainer>
       <GuestLabelContainer>

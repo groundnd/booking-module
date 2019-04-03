@@ -12,6 +12,7 @@ const GuestLabel = styled.label`
   font-size: ${theme.fonts.size[3]};
   color: ${theme.fonts.color[0]};
   line-height: ${theme.fonts.lineHeight[1]};
+  font-family: ${theme.fonts.primary};
 `;
 
 const GuestButton = styled.button`

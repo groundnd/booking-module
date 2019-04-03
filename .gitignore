@@ -3,3 +3,4 @@ node_modules
 database/config
 webpack.config.js
 BookingModule.bundle.js
+tests

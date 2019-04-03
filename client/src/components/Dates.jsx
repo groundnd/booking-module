@@ -13,6 +13,7 @@ const DateLabel = styled.label`
   font-size: ${theme.fonts.size[3]};
   color: ${theme.fonts.color[0]};
   line-height: ${theme.fonts.lineHeight[1]};
+  font-family: ${theme.fonts.primary};
 `;
 
 const DateContainer = styled.div`
