@@ -18,9 +18,12 @@ const PerNight = styled.span`
   color: ${theme.fonts.color[0]};
 `;
 
-const PriceLabel = () => (
+const PriceLabel = ({ price }) => (
   <div id="bm-price-label-container">
-    <Price>$45</Price>
+    <Price>
+      $
+      { price || 45}
+    </Price>
     <PerNight> per night</PerNight>
   </div>
 );
