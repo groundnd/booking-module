@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReportListing = props => (
+const ReportListing = () => (
   <div id="bm-report-listing-container" />
 );
 

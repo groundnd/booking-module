@@ -9,7 +9,7 @@ const LineBreak = styled.div`
   border-bottom: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
 `;
 
-const PriceReview = props => (
+const PriceReview = () => (
   <div id="bm-price-review-container">
     <PriceLabel />
     <Reviews />
