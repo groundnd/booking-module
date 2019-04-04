@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PriceLabel from './PriceLabel';
-import Reviews from './Reviews';
+import { Reviews } from './Reviews';
 import theme from './themes/default';
 
 const LineBreak = styled.div`
