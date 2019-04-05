@@ -72,12 +72,12 @@ const Guests = ({ guests, infants }) => (
       <GuestTextContainer>
         <GuestHighlighter>
           <GuestText id="bm-guest-label">
-            {`${guests || 1} Guest${guests > 1 ? 's' : ''},`}
+            {`${guests || 1} Guest${guests > 1 ? 's' : ''}`}
           </GuestText>
         </GuestHighlighter>
         <GuestHighlighter>
           <GuestText id="bm-infant-label">
-            {infants ? (` ${infants} Infant${infants > 1 ? 's' : ''}`) : ''}
+            {infants ? (`, ${infants} Infant${infants > 1 ? 's' : ''}`) : ''}
           </GuestText>
         </GuestHighlighter>
       </GuestTextContainer>
