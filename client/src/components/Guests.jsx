@@ -65,16 +65,20 @@ const GuestText = styled.span`
   font-family: ${theme.fonts.primary};
 `;
 
-const Guests = () => (
+const Guests = ({ guests, infants }) => (
   <GuestContainer>
     <GuestLabel>Guests</GuestLabel>
     <GuestButton>
       <GuestTextContainer>
-        <GuestHighlighter className="bm-highlighter">
-          <GuestText>5 Guests,</GuestText>
+        <GuestHighlighter>
+          <GuestText id="bm-guest-label">
+            {`${guests || 1} Guest${guests > 1 ? 's' : ''},`}
+          </GuestText>
         </GuestHighlighter>
-        <GuestHighlighter className="bm-highlighter">
-          <GuestText> 2 Infants</GuestText>
+        <GuestHighlighter>
+          <GuestText id="bm-infant-label">
+            {infants ? (` ${infants} Infant${infants > 1 ? 's' : ''}`) : ''}
+          </GuestText>
         </GuestHighlighter>
       </GuestTextContainer>
       <GuestArrow viewBox="0 0 18 18">
