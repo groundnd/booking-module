@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Stars from './Stars';
+import { Stars } from './Stars';
 import theme from './themes/default';
 
 const ReviewContainer = styled.div`
@@ -16,12 +16,17 @@ const ReviewLabel = styled.span`
 `;
 
 
-const Reviews = () => (
+const Reviews = ({ numReviews }) => (
   // to-do: wrap stars and review label in button to allow navigation on-screen
   <ReviewContainer>
     <Stars />
-    <ReviewLabel> 155 </ReviewLabel>
+    <ReviewLabel> 
+      {numReviews || 155}
+    </ReviewLabel>
   </ReviewContainer>
 );
 
-export default Reviews;
+export {
+  Reviews,
+  ReviewLabel,
+};

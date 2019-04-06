@@ -4,6 +4,7 @@ import theme from './themes/default';
 import Dates from './Dates';
 import Guests from './Guests';
 import GuestDropdown from './GuestDropdown';
+import Calendar from './Calendar';
 
 const CheckOutContainer = styled.div`
   display: flex;
@@ -20,6 +21,7 @@ const Button = styled.button`
   height: 46px;
   border: 2px solid transparent;
   border-radius: 4px;
+  margin-top: 24px;
 `;
 
 const ChargeContainer = styled.div`
@@ -44,14 +46,15 @@ const DropDownContainer = styled.div`
 `;
 
 
-const BookingForm = props => (
+const BookingForm = () => (
   <div id="bm-booking-form-container">
     <form id="bm-booking-form">
       <CheckOutContainer>
         <Dates />
+        <Calendar />
         <Guests />
         <DropDownContainer>
-          <GuestDropdown />
+          {/* <GuestDropdown /> */}
         </DropDownContainer>
         <Button>Book</Button>
       </CheckOutContainer>

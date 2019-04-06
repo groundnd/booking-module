@@ -99,20 +99,22 @@ const CloseButton = styled.button`
   }
 `;
 
-const GuestDropdown = props => (
+const GuestDropdown = ({ maxGuests, adults = 1, children = 0, infants = 0 }) => (
   <DropdownContainer>
     <AdultsContainer>
       <GuestLabelContainer>
         <GuestLabel>Adults</GuestLabel>
       </GuestLabelContainer>
       <GuestCountContainer>
-        <GuestCountButton>
+        <GuestCountButton id="bm-adults-increase-button">
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
           </GuestCountSVG>
         </GuestCountButton>
-        <GuestCountLabel>1</GuestCountLabel>
-        <GuestCountButton>
+        <GuestCountLabel id="bm-adults-count-label">
+          {adults}
+        </GuestCountLabel>
+        <GuestCountButton id="bm-adults-decrease-button">
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
             <rect height="12" rx="1" width="2" x="11" y="6" />
@@ -126,13 +128,15 @@ const GuestDropdown = props => (
         <SubLabel>Ages 2–12</SubLabel>
       </GuestLabelContainer>
       <GuestCountContainer>
-        <GuestCountButton>
+        <GuestCountButton id="bm-children-increase-button">
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
           </GuestCountSVG>
         </GuestCountButton>
-        <GuestCountLabel>1</GuestCountLabel>
-        <GuestCountButton>
+        <GuestCountLabel id="bm-children-count-label">
+          {children}
+        </GuestCountLabel>
+        <GuestCountButton id="bm-children-decrease-button">
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
             <rect height="12" rx="1" width="2" x="11" y="6" />
@@ -146,13 +150,15 @@ const GuestDropdown = props => (
         <SubLabel>Under 2</SubLabel>
       </GuestLabelContainer>
       <GuestCountContainer>
-        <GuestCountButton>
+        <GuestCountButton id="bm-infants-increase-button">
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
           </GuestCountSVG>
         </GuestCountButton>
-        <GuestCountLabel>1</GuestCountLabel>
-        <GuestCountButton>
+        <GuestCountLabel id="bm-infants-count-label">
+          {infants}
+        </GuestCountLabel>
+        <GuestCountButton id="bm-infants-decrease-button">
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
             <rect height="12" rx="1" width="2" x="11" y="6" />

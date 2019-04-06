@@ -2,7 +2,7 @@
 const theme = {};
 
 theme.palette = {
-  // [0] Orange, [1] Darkest Green, [2] Accent green 1, [3] Accent green 2, [4] dark grey, [5] light grey, [6] highlight color, [7] lightest grey
+  // [0] Orange, [1] Darkest Green, [2] Accent green 1, [3] Accent green 2, [4] dark grey, [5] light grey (empty star), [6] highlight color, [7] lightest grey
   primary: ['#FF5A5F', '#006a70', '#006c70', '#008489', '#757575', '#d8d8d8', '#99ede6', '#edf6f6'],
   svg: ['#008489'],
   background: ['#FFFFFF'],
