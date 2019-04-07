@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
 import ReportListing from './ReportListing';
 import BookingContainer from './BookingContainer';
+import { fetchAccommodation } from '../actions/AccommodationAvailabilityActions';
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -11,27 +13,10 @@ const GlobalStyles = createGlobalStyle`
   `;
 
 class BookingModule extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      accommodationid: Math.floor(Math.random() * 100),
-      data: {},
-    };
-  }
-
 
   componentDidMount() {
-    this.getBookingInfo.call(this);
-  }
-
-  async getBookingInfo() {
-    const { accommodationid } = this.state;
-    const response = await fetch(`/bookings/${accommodationid}/reserve`);
-    const data = await response.json();
-    this.setState({
-      data,
-    });
+    const { dispatch } = this.props;
+    dispatch(fetchAccommodation());
   }
 
   render() {
@@ -47,4 +32,11 @@ class BookingModule extends Component {
   }
 }
 
-export default BookingModule;
+const mapStateToProps = state => ({
+  accommodation: state.accommodation,
+  availability: state.accommodation.availability,
+  loading: state.accommodation.loading,
+  error: state.accommodation.error,
+});
+
+export default connect(mapStateToProps)(BookingModule);

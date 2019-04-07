@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: ['@babel/polyfill', './client/src/index.js'],
+  entry: ['@babel/polyfill', './client/src/index.jsx'],
   module: {
     rules: [
       {

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
+import GuestDropdown from './GuestDropdown';
 
 const GuestContainer = styled.div`
   width: 100%;
@@ -65,8 +66,14 @@ const GuestText = styled.span`
   font-family: ${theme.fonts.primary};
 `;
 
-const Guests = ({ guests, infants }) => (
-  <GuestContainer>
+const DropDownContainer = styled.div`
+  display: block;
+  z-index: 2;
+  width: 100%;
+`;
+
+const Guests = ({ guests, infants, handleDropdownClick, guestDropdown }) => (
+  <GuestContainer onClick={handleDropdownClick}>
     <GuestLabel>Guests</GuestLabel>
     <GuestButton>
       <GuestTextContainer>
@@ -85,7 +92,13 @@ const Guests = ({ guests, infants }) => (
         <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />
       </GuestArrow>
     </GuestButton>
+    <DropDownContainer>
+      {guestDropdown
+        ? <GuestDropdown /> 
+        : null}
+    </DropDownContainer>
   </GuestContainer>
+  
 );
 
 

@@ -5,6 +5,7 @@ import Dates from './Dates';
 import Guests from './Guests';
 import GuestDropdown from './GuestDropdown';
 import Calendar from './Calendar';
+import GuestContainerState from '../containers/Guests';
 
 const CheckOutContainer = styled.div`
   display: flex;
@@ -39,23 +40,13 @@ const ChargeNotice = styled.span`
   font-family: ${theme.fonts.primary};
 `;
 
-const DropDownContainer = styled.div`
-  display: block;
-  z-index: 2;
-  width: 100%;
-`;
-
-
 const BookingForm = () => (
   <div id="bm-booking-form-container">
     <form id="bm-booking-form">
       <CheckOutContainer>
         <Dates />
         <Calendar />
-        <Guests />
-        <DropDownContainer>
-          {/* <GuestDropdown /> */}
-        </DropDownContainer>
+        <GuestContainerState />
         <Button>Book</Button>
       </CheckOutContainer>
       <ChargeContainer>
