@@ -24,23 +24,7 @@ const mapDispatchToProps = dispatch => ({
     e.preventDefault();
     dispatch(toggleGuestDropdown());
   },
-  changeGuests: (e) => {
-    const type = e.target.id.slice(3, 5);
-    const action = e.target.id.slice(6);
-    let guestType;
-    let num;
-    if (type === 'ad') {
-      guestType = 'numAdults';
-    } else if (type === 'ch') {
-      guestType = 'numChildren';
-    } else {
-      guestType = 'numInfants';
-    }
-    if (action === 'inc') {
-      num = Number(e.target.value) + 1;
-    } else {
-      num = Number(e.target.value) - 1;
-    }
+  changeGuests: (guestType, num) => {
     dispatch(changeGuests(guestType, num));
   },
   selectGuests: () => {

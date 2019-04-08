@@ -25,6 +25,7 @@ export default function calendarReducer(state = initialState, action) {
         checkInDate: action.date,
         checkInSelected: false,
         checkOutSelected: true,
+        checkOutDate: null,
       };
 
     case CHANGE_CHECKOUT:

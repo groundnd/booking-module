@@ -115,11 +115,9 @@ const GuestDropdown = ({
       </GuestLabelContainer>
       <GuestCountContainer>
         <GuestCountButton
-          id="bm-ad-dec"
-          value={numAdults}
           onClick={(e) => {
             e.preventDefault();
-            if (numAdults > 1) changeGuests(e);
+            if (numAdults > 1) changeGuests('numAdults', numAdults - 1);
           }}
         >
           <GuestCountSVG viewBox="0 0 24 24">
@@ -130,11 +128,9 @@ const GuestDropdown = ({
           {numAdults}
         </GuestCountLabel>
         <GuestCountButton
-          id="bm-ad-inc"
-          value={numAdults}
           onClick={(e) => {
             e.preventDefault();
-            if (numAdults + numChildren < maxGuests) changeGuests(e);
+            if (numAdults + numChildren < maxGuests) changeGuests('numAdults', numAdults + 1);
           }}
         >
           <GuestCountSVG viewBox="0 0 24 24">
@@ -151,11 +147,9 @@ const GuestDropdown = ({
       </GuestLabelContainer>
       <GuestCountContainer>
         <GuestCountButton
-          id="bm-ch-dec"
-          value={numChildren}
           onClick={(e) => {
             e.preventDefault();
-            if (numChildren > 0) changeGuests(e);
+            if (numChildren > 0) changeGuests('numChildren', numChildren - 1);
           }}
         >
           <GuestCountSVG viewBox="0 0 24 24">
@@ -166,11 +160,9 @@ const GuestDropdown = ({
           {numChildren}
         </GuestCountLabel>
         <GuestCountButton
-          id="bm-ch-inc"
-          value={numChildren}
           onClick={(e) => {
             e.preventDefault();
-            if (numAdults + numChildren < maxGuests) changeGuests(e);
+            if (numAdults + numChildren < maxGuests) changeGuests('numChildren', numChildren + 1);
           }}
         >
           <GuestCountSVG viewBox="0 0 24 24">
@@ -187,11 +179,9 @@ const GuestDropdown = ({
       </GuestLabelContainer>
       <GuestCountContainer>
         <GuestCountButton
-          id="bm-in-dec"
-          value={numInfants}
           onClick={(e) => {
             e.preventDefault();
-            if (numInfants > 0) changeGuests(e);
+            if (numInfants > 0) changeGuests('numInfants', numInfants - 1);
           }}
         >
           <GuestCountSVG viewBox="0 0 24 24">
@@ -202,11 +192,9 @@ const GuestDropdown = ({
           {numInfants}
         </GuestCountLabel>
         <GuestCountButton
-          id="bm-in-inc"
-          value={numInfants}
           onClick={(e) => {
             e.preventDefault();
-            if (numInfants < 5) changeGuests(e);
+            if (numInfants < 5) changeGuests('numInfants', numInfants + 1);
           }}
         >
           <GuestCountSVG viewBox="0 0 24 24">
