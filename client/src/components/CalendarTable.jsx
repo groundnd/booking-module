@@ -48,23 +48,31 @@ const CalendarTable = ({
   lastAvailable,
   minStay,
 }) => {
-  const firstDay = new Date(`${DateData[currentMonth].month} 1, ${currentYear + 1900}`).getDay();
+  const firstDay = new Date(`${currentYear + 1900} ${DateData[currentMonth].month} 1`).getDay();
+  console.log(firstDay);
   const days = [];
   for (let i = 0; i < firstDay; i += 1) {
     days.push(<EmptyCell />);
   }
-  for (let j = 0; j < DateData[currentMonth].numDays; j += 1) {
-    const date = formatDate(new Date(currentYear + 1900, currentMonth, j + firstDay));
+  for (let j = 1; j <= DateData[currentMonth].numDays; j += 1) {
+    const date = formatDate(new Date(currentYear + 1900, currentMonth, j));
     // eslint-disable-next-line no-unused-expressions
     availability[date]
-      ? (days.push(<UnavailableDay id={date}>{j + firstDay}</UnavailableDay>))
-      : (days.push(<AvailableDay id={date}>{j + firstDay}</AvailableDay>));
+      ? (days.push(<UnavailableDay id={date}>{j}</UnavailableDay>))
+      : (days.push(<AvailableDay id={date}>{j}</AvailableDay>));
   }
   const days1 = days.slice(0, 7);
   const days2 = days.slice(7, 14);
   const days3 = days.slice(14, 21);
   const days4 = days.slice(21, 28);
-  const days5 = days.slice(28);
+  let days5;
+  let days6;
+  if (days.length > 34) {
+    days5 = days.slice(28, 35);
+    days6 = days.slice(35);
+  } else {
+    days5 = days.slice(28);
+  }
   return (
     <StyledCalendarTable>
       {Object.keys(availability).length
@@ -85,6 +93,11 @@ const CalendarTable = ({
             <tr>
               {days5}
             </tr>
+            {
+              days.length > 34
+                ? (<tr>{days6}</tr>)
+                : ''
+            }
           </TableBody>
         )
         : (<div />)
