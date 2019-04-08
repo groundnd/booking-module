@@ -20,5 +20,4 @@ export const changeCheckOut = date => ({
 export const changeMonth = command => ({
   type: CHANGE_MONTH,
   command,
-  // TODO: command = next or back--new month/year calculated in reducer
 });

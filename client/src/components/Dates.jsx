@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
+import { toggleCalendar } from '../actions/Calendar';
 
 const DateMargin = styled.div`
   width: 100%;
@@ -62,7 +63,7 @@ const Dates = props => (
     <DateLabel> Dates </DateLabel>
     <DateContainer>
       <DateSelector>
-        <DateInput placeholder="Check In" />
+        <DateInput placeholder="Check In" onClick={() => toggleCalendar()} />
       </DateSelector>
       <Arrow viewBox="0 0 24 24">
         <path d="m0 12.5a.5.5 0 0 0 .5.5h21.79l-6.15 6.15a.5.5 0 1 0 .71.71l7-7v-.01a.5.5 0 0 0 .14-.35.5.5 0 0 0 -.14-.35v-.01l-7-7a .5.5 0 0 0 -.71.71l6.15 6.15h-21.79a.5.5 0 0 0 -.5.5z" fillRule="evenodd" />

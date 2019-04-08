@@ -9,16 +9,7 @@ const initialState = {
   availability: [],
   loading: false,
   error: null,
-  appState: {
-    checkInDate: null,
-    checkOutDate: null,
-    currentDay: new Date().getDay(),
-    currentMonth: new Date().getMonth(),
-    currentYear: new Date().getYear(),
-    checkInSelected: false,
-    checkOutSelected: false,
-    priceListDisplay: false,
-  },
+  priceListDisplay: false,
 };
 
 export default function accommodationReducer(state = initialState, action) {

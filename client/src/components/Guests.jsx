@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
@@ -72,7 +73,12 @@ const DropDownContainer = styled.div`
   width: 100%;
 `;
 
-const Guests = ({ guests, infants, handleDropdownClick, guestDropdown }) => (
+const Guests = ({
+  guests,
+  infants,
+  handleDropdownClick,
+  guestDropdown,
+}) => (
   <GuestContainer>
     <GuestLabel>Guests</GuestLabel>
     <GuestButton onClick={handleDropdownClick}>
@@ -94,11 +100,10 @@ const Guests = ({ guests, infants, handleDropdownClick, guestDropdown }) => (
     </GuestButton>
     <DropDownContainer>
       {guestDropdown
-        ? <GuestDropdown handleDropdownClick={handleDropdownClick}/>
+        ? <GuestDropdown handleDropdownClick={handleDropdownClick} />
         : null}
     </DropDownContainer>
   </GuestContainer>
-  
 );
 
 

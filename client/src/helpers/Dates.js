@@ -24,3 +24,7 @@ export const formatDate = (date) => {
 
   return [year, month, day].join('-');
 };
+
+export const nextMonth = (month, year) => (month === 11 ? [0, year + 1] : [month + 1, year]);
+
+export const prevMonth = (month, year) => (month === 0 ? [11, year - 1] : [month - 1, year]);

@@ -53,14 +53,15 @@ export const fetchAvailabilitySuccess = ({ availability }) => ({
 });
 
 export const fetchAvailability = (
-  accommodationid = accommodationID,
   startDate,
   endDate,
+  accommodationid = accommodationID,
 ) => dispatch => (
   fetch(`/bookings/${accommodationid}/reserve/${startDate}&${endDate}`)
     .then(handleErrors)
     .then(res => res.json())
     .then((json) => {
+      console.log(json);
       const availability = json.availability.reduce((acc, cv) => {
         acc[formatDate(new Date(`${cv.date} Z`))] = true;
         return acc;
