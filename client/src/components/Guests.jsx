@@ -74,23 +74,29 @@ const DropDownContainer = styled.div`
 `;
 
 const Guests = ({
-  guests,
-  infants,
+  numGuests,
+  numAdults,
+  numChildren,
+  numInfants,
   handleDropdownClick,
   guestDropdown,
+  changeGuests,
+  selectGuests,
+  selectInfants,
+  maxGuests,
 }) => (
   <GuestContainer>
     <GuestLabel>Guests</GuestLabel>
     <GuestButton onClick={handleDropdownClick}>
       <GuestTextContainer>
         <GuestHighlighter>
-          <GuestText id="bm-guest-label">
-            {`${guests || 1} Guest${guests > 1 ? 's' : ''}`}
+          <GuestText id="bm-guest-label" onClick={() => selectGuests()}>
+            {`${numGuests || 1} Guest${numGuests > 1 ? 's' : ''}`}
           </GuestText>
         </GuestHighlighter>
         <GuestHighlighter>
-          <GuestText id="bm-infant-label">
-            {infants ? (`, ${infants} Infant${infants > 1 ? 's' : ''}`) : ''}
+          <GuestText id="bm-infant-label" onClick={() => selectInfants()}>
+            {numInfants ? (`, ${numInfants} Infant${numInfants > 1 ? 's' : ''}`) : ''}
           </GuestText>
         </GuestHighlighter>
       </GuestTextContainer>
@@ -100,7 +106,17 @@ const Guests = ({
     </GuestButton>
     <DropDownContainer>
       {guestDropdown
-        ? <GuestDropdown handleDropdownClick={handleDropdownClick} />
+        ? (
+          <GuestDropdown
+            handleDropdownClick={handleDropdownClick}
+            numGuests={numGuests}
+            numAdults={numAdults}
+            numChildren={numChildren}
+            numInfants={numInfants}
+            changeGuests={changeGuests}
+            maxGuests={maxGuests}
+          />
+)
         : null}
     </DropDownContainer>
   </GuestContainer>

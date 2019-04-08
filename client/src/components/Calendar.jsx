@@ -69,6 +69,8 @@ const Calendar = ({
   changeMonth,
   toggleCalendar,
   fetchAvailability,
+  checkInSelected,
+  checkOutSelected,
 }) => (
   <CalendarContainer>
     <CalendarHeader>
@@ -111,6 +113,8 @@ const Calendar = ({
       changeCheckOut={changeCheckOut}
       changeMonth={changeMonth}
       toggleCalendar={toggleCalendar}
+      checkInSelected={checkInSelected}
+      checkOutSelected={checkOutSelected}
     />
     <div id="Empty space and ?" />
   </CalendarContainer>

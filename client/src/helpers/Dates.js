@@ -28,3 +28,5 @@ export const formatDate = (date) => {
 export const nextMonth = (month, year) => (month === 11 ? [0, year + 1] : [month + 1, year]);
 
 export const prevMonth = (month, year) => (month === 0 ? [11, year - 1] : [month - 1, year]);
+
+export const getCheckInDay = date => (date.slice(8)[0] !== 0 ? Number(date.slice(8)) : Number(date.slice(9)));

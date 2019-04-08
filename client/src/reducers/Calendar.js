@@ -9,7 +9,7 @@ import {
 const initialState = {
   checkInDate: null,
   checkOutDate: null,
-  currentDay: new Date().getDay(),
+  currentDay: new Date().getDate(),
   currentMonth: new Date().getMonth(),
   currentYear: new Date().getYear(),
   checkInSelected: false,
@@ -23,14 +23,15 @@ export default function calendarReducer(state = initialState, action) {
       return {
         ...state,
         checkInDate: action.date,
-        dateSelect: 'CheckOut',
+        checkInSelected: false,
+        checkOutSelected: true,
       };
 
     case CHANGE_CHECKOUT:
       return {
         ...state,
-        checkInDate: action.date,
-        dateSelect: null,
+        checkOutDate: action.date,
+        checkOutSelected: false,
       };
 
     case CHANGE_MONTH:
@@ -50,7 +51,8 @@ export default function calendarReducer(state = initialState, action) {
     case TOGGLE_CALENDAR:
       return {
         ...state,
-        calendarDisplay: true,
+        checkInSelected: true,
+        checkOutSelected: false,
       };
 
     default:

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import theme from './themes/default';
 import Dates from './Dates';
 import CalendarContainerState from '../containers/Calendar';
 import GuestContainerState from '../containers/Guests';
+import { fetchAccommodation } from '../actions/AccommodationAvailabilityActions';
+import { toggleCalendar } from '../actions/Calendar';
 
 const CheckOutContainer = styled.div`
   display: flex;
@@ -38,21 +42,54 @@ const ChargeNotice = styled.span`
   font-family: ${theme.fonts.primary};
 `;
 
-const BookingForm = () => (
-  <div id="bm-booking-form-container">
-    <form id="bm-booking-form">
-      <CheckOutContainer>
-        <Dates />
-        <CalendarContainerState />
-        <GuestContainerState />
-        <Button>Book</Button>
-      </CheckOutContainer>
-      <ChargeContainer>
-        <ChargeNotice>You won&apos;t be charged yet</ChargeNotice>
-      </ChargeContainer>
-    </form>
-  </div>
-);
+class BookingForm extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchAccommodation());
+  }
+
+  render() {
+    const { checkInDate, checkOutDate, toggleCalendar, checkInSelected, checkOutSelected } = this.props;
+    return (
+      <div id="bm-booking-form-container">
+        <form id="bm-booking-form">
+          <CheckOutContainer>
+            <Dates checkInDate={checkInDate} checkOutDate={checkOutDate} toggleCalendar={toggleCalendar} />
+            {checkInSelected || checkOutSelected
+              ? <CalendarContainerState />
+              : ''
+            }
+            <GuestContainerState />
+            <Button>Book</Button>
+          </CheckOutContainer>
+          <ChargeContainer>
+            <ChargeNotice>You won&apos;t be charged yet</ChargeNotice>
+          </ChargeContainer>
+        </form>
+      </div>
+    );
+  }
+}
 
 
-export default BookingForm;
+const mapStateToProps = state => ({
+  accommodation: state.accommodation,
+  availability: state.accommodation.availability,
+  checkInDate: state.calendar.checkInDate,
+  checkOutDate: state.calendar.checkOutDate,
+  checkInSelected: state.calendar.checkInSelected,
+  checkOutSelected: state.calendar.checkOutSelected,
+  loading: state.accommodation.loading,
+  error: state.accommodation.error,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleCalendar: () => {
+      dispatch(toggleCalendar());
+    },
+    dispatch,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookingForm);

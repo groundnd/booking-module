@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
@@ -101,10 +102,11 @@ const CloseButton = styled.button`
 
 const GuestDropdown = ({
   maxGuests,
-  adults = 1,
-  children = 0,
-  infants = 0,
+  numAdults = 1,
+  numChildren = 0,
+  numInfants = 0,
   handleDropdownClick,
+  changeGuests,
 }) => (
   <DropdownContainer>
     <AdultsContainer>
@@ -112,15 +114,29 @@ const GuestDropdown = ({
         <GuestLabel>Adults</GuestLabel>
       </GuestLabelContainer>
       <GuestCountContainer>
-        <GuestCountButton id="bm-adults-increase-button">
+        <GuestCountButton
+          id="bm-ad-dec"
+          value={numAdults}
+          onClick={(e) => {
+            e.preventDefault();
+            if (numAdults > 1) changeGuests(e);
+          }}
+        >
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
           </GuestCountSVG>
         </GuestCountButton>
         <GuestCountLabel id="bm-adults-count-label">
-          {adults}
+          {numAdults}
         </GuestCountLabel>
-        <GuestCountButton id="bm-adults-decrease-button">
+        <GuestCountButton
+          id="bm-ad-inc"
+          value={numAdults}
+          onClick={(e) => {
+            e.preventDefault();
+            if (numAdults + numChildren < maxGuests) changeGuests(e);
+          }}
+        >
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
             <rect height="12" rx="1" width="2" x="11" y="6" />
@@ -134,15 +150,29 @@ const GuestDropdown = ({
         <SubLabel>Ages 2–12</SubLabel>
       </GuestLabelContainer>
       <GuestCountContainer>
-        <GuestCountButton id="bm-children-increase-button">
+        <GuestCountButton
+          id="bm-ch-dec"
+          value={numChildren}
+          onClick={(e) => {
+            e.preventDefault();
+            if (numChildren > 0) changeGuests(e);
+          }}
+        >
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
           </GuestCountSVG>
         </GuestCountButton>
         <GuestCountLabel id="bm-children-count-label">
-          {children}
+          {numChildren}
         </GuestCountLabel>
-        <GuestCountButton id="bm-children-decrease-button">
+        <GuestCountButton
+          id="bm-ch-inc"
+          value={numChildren}
+          onClick={(e) => {
+            e.preventDefault();
+            if (numAdults + numChildren < maxGuests) changeGuests(e);
+          }}
+        >
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
             <rect height="12" rx="1" width="2" x="11" y="6" />
@@ -156,15 +186,29 @@ const GuestDropdown = ({
         <SubLabel>Under 2</SubLabel>
       </GuestLabelContainer>
       <GuestCountContainer>
-        <GuestCountButton id="bm-infants-increase-button">
+        <GuestCountButton
+          id="bm-in-dec"
+          value={numInfants}
+          onClick={(e) => {
+            e.preventDefault();
+            if (numInfants > 0) changeGuests(e);
+          }}
+        >
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
           </GuestCountSVG>
         </GuestCountButton>
         <GuestCountLabel id="bm-infants-count-label">
-          {infants}
+          {numInfants}
         </GuestCountLabel>
-        <GuestCountButton id="bm-infants-decrease-button">
+        <GuestCountButton
+          id="bm-in-inc"
+          value={numInfants}
+          onClick={(e) => {
+            e.preventDefault();
+            if (numInfants < 5) changeGuests(e);
+          }}
+        >
           <GuestCountSVG viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
             <rect height="12" rx="1" width="2" x="11" y="6" />
