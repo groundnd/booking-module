@@ -116,7 +116,7 @@ const Guests = ({
             changeGuests={changeGuests}
             maxGuests={maxGuests}
           />
-)
+        )
         : null}
     </DropDownContainer>
   </GuestContainer>
