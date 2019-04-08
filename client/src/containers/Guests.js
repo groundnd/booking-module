@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Guests from '../components/Guests';
 import {
-  toggleGuestDropdown, guestSelected, infantsSelected, changeGuests
+  toggleGuestDropdown, guestSelected, infantsSelected, changeGuests,
 } from '../actions/Guests';
 
 // Actions:

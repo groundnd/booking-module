@@ -16,12 +16,12 @@ const ReviewLabel = styled.span`
 `;
 
 
-const Reviews = ({ numReviews }) => (
+const Reviews = ({ numReviews, rating }) => (
   // to-do: wrap stars and review label in button to allow navigation on-screen
   <ReviewContainer>
-    <Stars />
+    <Stars rating={rating} />
     <ReviewLabel>
-      { ` ${numReviews || 155}` }
+      { ` ${numReviews || 'No Reviews Yet'}` }
     </ReviewLabel>
   </ReviewContainer>
 );

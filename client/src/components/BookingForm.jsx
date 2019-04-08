@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import theme from './themes/default';
 import Dates from './Dates';
@@ -49,7 +48,13 @@ class BookingForm extends Component {
   }
 
   render() {
-    const { checkInDate, checkOutDate, toggleCalendar, checkInSelected, checkOutSelected } = this.props;
+    const {
+      checkInDate,
+      checkOutDate,
+      toggleCalendar,
+      checkInSelected,
+      checkOutSelected,
+    } = this.props;
     return (
       <div id="bm-booking-form-container">
         <form id="bm-booking-form">
@@ -83,13 +88,12 @@ const mapStateToProps = state => ({
   error: state.accommodation.error,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleCalendar: () => {
-      dispatch(toggleCalendar());
-    },
-    dispatch,
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  toggleCalendar: () => {
+    dispatch(toggleCalendar());
+  },
+  dispatch,
+});
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookingForm);

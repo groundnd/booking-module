@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import PriceReview from './PriceReviews';
 import theme from './themes/default';
 import BookingForm from './BookingForm';
+import PriceReviewState from '../containers/PriceReviews';
 
 const BookingBox = styled.div`
   padding-left: 24px;
@@ -23,7 +23,7 @@ const BookingContainer = () => (
   <BookingBox>
     <Spacer>
       <div id="bm-booking-content">
-        <PriceReview />
+        <PriceReviewState />
         <BookingForm />
       </div>
     </Spacer>

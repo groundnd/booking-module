@@ -47,9 +47,9 @@ const EmptyStar = () => (
 );
 
 
-const Stars = ({ score }) => {
+const Stars = ({ rating }) => {
   const stars = [];
-  let numStars = score || 3.5;
+  let numStars = rating || 0;
   const numEmptyStars = Math.floor(5 - numStars);
   while (numStars - 1 >= 0) {
     stars.push(FullStar());
