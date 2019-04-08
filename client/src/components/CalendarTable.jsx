@@ -35,7 +35,7 @@ const AvailableDay = styled(EmptyCell)`
 const UnavailableDay = styled(EmptyCell)`
   border: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
   text-decoration: line-through;
-  color: ${theme.palette.primary[7]};
+  color: ${theme.palette.primary[5]};
   cursor: default;
 `;
 
@@ -69,21 +69,18 @@ const CalendarTable = ({
           : (days.push(<AvailableDay id={date} onClick={e => changeCheckIn(e.target.id)}>{j}</AvailableDay>));
     }
   } else if (checkOutSelected) {
-    let day = 1;
     let firstUnavail = false;
     const checkInDay = getCheckInDay(checkInDate);
-    while (day < DateData[currentMonth].numDays) {
-      const date = formatDate(new Date(currentYear + 1900, currentMonth, day));
-      if (day > checkInDay && availability[date]) {firstUnavail = true;}
-      if (day < checkInDay || availability[date] || date < today || firstUnavail) {
-        days.push(<UnavailableDay id={date}>{day}</UnavailableDay>);
+    for (let j = 1; j < DateData[currentMonth].numDays; j += 1) {
+      const date = formatDate(new Date(currentYear + 1900, currentMonth, j));
+      if (j > checkInDay && availability[date]) {firstUnavail = true;}
+      if (j < checkInDay || availability[date] || date < today || firstUnavail) {
+        days.push(<UnavailableDay id={date}>{j}</UnavailableDay>);
       } else {
-        (days.push(<AvailableDay id={date} onClick={e => changeCheckOut(e.target.id)}>{day}</AvailableDay>));
+        (days.push(<AvailableDay id={date} onClick={e => changeCheckOut(e.target.id)}>{j}</AvailableDay>));
       }
-      day += 1;
     }
   }
-  
   const days1 = days.slice(0, 7);
   const days2 = days.slice(7, 14);
   const days3 = days.slice(14, 21);
