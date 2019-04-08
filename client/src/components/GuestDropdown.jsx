@@ -99,7 +99,7 @@ const CloseButton = styled.button`
   }
 `;
 
-const GuestDropdown = ({ maxGuests, adults = 1, children = 0, infants = 0 }) => (
+const GuestDropdown = ({ maxGuests, adults = 1, children = 0, infants = 0, handleDropdownClick }) => (
   <DropdownContainer>
     <AdultsContainer>
       <GuestLabelContainer>
@@ -169,7 +169,7 @@ const GuestDropdown = ({ maxGuests, adults = 1, children = 0, infants = 0 }) => 
     <FooterContainer>
       <SubLabel>4 guests maximum. Infants don’t count toward the number of guests.</SubLabel>
       <CloseButtonContainer>
-        <CloseButton>Close</CloseButton>
+        <CloseButton onClick={handleDropdownClick}>Close</CloseButton>
       </CloseButtonContainer>
     </FooterContainer>
   </DropdownContainer>

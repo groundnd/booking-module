@@ -73,9 +73,9 @@ const DropDownContainer = styled.div`
 `;
 
 const Guests = ({ guests, infants, handleDropdownClick, guestDropdown }) => (
-  <GuestContainer onClick={handleDropdownClick}>
+  <GuestContainer>
     <GuestLabel>Guests</GuestLabel>
-    <GuestButton>
+    <GuestButton onClick={handleDropdownClick}>
       <GuestTextContainer>
         <GuestHighlighter>
           <GuestText id="bm-guest-label">
@@ -94,7 +94,7 @@ const Guests = ({ guests, infants, handleDropdownClick, guestDropdown }) => (
     </GuestButton>
     <DropDownContainer>
       {guestDropdown
-        ? <GuestDropdown /> 
+        ? <GuestDropdown handleDropdownClick={handleDropdownClick}/>
         : null}
     </DropDownContainer>
   </GuestContainer>

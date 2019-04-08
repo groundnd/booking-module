@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
+import { DateData, formatDate } from '../helpers/Dates';
 
 // Todo: fix spacing/margins
 
@@ -26,25 +27,41 @@ const EmptyCell = styled.td`
 
 const AvailableDay = styled(EmptyCell)`
   border: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
+  color: ${theme.palette.primary[1]};
 `;
 
 const UnavailableDay = styled(EmptyCell)`
   border: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
+  text-decoration: line-through;
+  color: ${theme.palette.primary[7]};
 `;
 
-const CalendarTable = () => {
-  let days = [];
-  for (let i = 0; i < 4; i += 1) {
+const CalendarTable = ({
+  currentDay,
+  currentMonth = 3,
+  currentYear = 119,
+  availability = {},
+  checkInDate,
+  checkOutDate,
+  lastAvailable,
+  minStay,
+}) => {
+  const firstDay = new Date(`${DateData[currentMonth].month} 1, ${currentYear + 1900}`).getDay();
+  const days = [];
+  for (let i = 0; i < firstDay; i += 1) {
     days.push(<EmptyCell />);
   }
-  for (let j = 0; j < 27; j += 1) {
-    j % 2 === 0 ? (days.push(<AvailableDay>{j + 4}</AvailableDay>)) : (days.push(<UnavailableDay>{j + 4}</UnavailableDay>));
+  for (let j = 0; j < DateData[currentMonth].numDays; j += 1) {
+    const date = formatDate(new Date(currentYear + 1900, currentMonth, j + firstDay));
+    console.log(date);
+    availability[date] ? (days.push(<UnavailableDay id={date}>{j + firstDay}</UnavailableDay>)) : (days.push(<AvailableDay id={date}>{j + firstDay}</AvailableDay>))
   }
-  let days1 = days.slice(0, 7);
-  let days2 = days.slice(7, 14);
-  let days3 = days.slice(14, 21);
-  let days4 = days.slice(21, 28);
-  let days5 = days.slice(28);
+  console.log(availability, days);
+  const days1 = days.slice(0, 7);
+  const days2 = days.slice(7, 14);
+  const days3 = days.slice(14, 21);
+  const days4 = days.slice(21, 28);
+  const days5 = days.slice(28);
   return (
     <StyledCalendarTable>
       <TableBody>

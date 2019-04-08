@@ -2,6 +2,7 @@ import {
   FETCH_ACCOMMODATIONS_BEGIN,
   FETCH_ACCOMMODATIONS_SUCCESS,
   FETCH_ACCOMMODATIONS_FAILURE,
+  FETCH_AVAILABILITY_SUCCESS,
 } from '../actions/AccommodationAvailabilityActions';
 
 const initialState = {
@@ -43,6 +44,12 @@ export default function accommodationReducer(state = initialState, action) {
         loading: false,
         error: action.payload.error,
         availability: [],
+      };
+
+    case FETCH_AVAILABILITY_SUCCESS:
+      return {
+        ...state,
+        availability: action.payload.availability,
       };
 
     default:

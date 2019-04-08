@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
 import Dates from './Dates';
-import Guests from './Guests';
-import GuestDropdown from './GuestDropdown';
-import Calendar from './Calendar';
+import CalendarContainerState from '../containers/Calendar';
 import GuestContainerState from '../containers/Guests';
 
 const CheckOutContainer = styled.div`
@@ -45,7 +43,7 @@ const BookingForm = () => (
     <form id="bm-booking-form">
       <CheckOutContainer>
         <Dates />
-        <Calendar />
+        <CalendarContainerState />
         <GuestContainerState />
         <Button>Book</Button>
       </CheckOutContainer>
