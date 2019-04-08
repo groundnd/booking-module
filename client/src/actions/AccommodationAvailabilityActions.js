@@ -20,7 +20,7 @@ export const fetchAccommodationsBegin = () => ({
 
 export const fetchAccommodationsSuccess = ({ accommodation, availability }) => ({
   type: FETCH_ACCOMMODATIONS_SUCCESS,
-  payload: { accommodation, availability }
+  payload: { accommodation, availability },
 });
 
 export const fetchAccommodationsFailure = error => ({
@@ -37,33 +37,36 @@ export const fetchAccommodation = (
       .then(handleErrors)
       .then(res => res.json())
       .then((json) => {
-        json.availability = json.availability.reduce((acc, cv) => {
+        const availability = json.availability.reduce((acc, cv) => {
           acc[formatDate(new Date(`${cv.date} Z`))] = true;
           return acc;
         }, {});
-        dispatch(fetchAccommodationsSuccess(json));
-        return json;
+        dispatch(fetchAccommodationsSuccess({ accommodation: json.accommodation, availability }));
+        return { accommodation: json.accommodation, availability };
       })
       .catch(error => dispatch(fetchAccommodationsFailure(error)));
   });
 
 export const fetchAvailabilitySuccess = ({ availability }) => ({
   type: FETCH_AVAILABILITY_SUCCESS,
-  payload: { availability }
+  payload: { availability },
 });
 
 export const fetchAvailability = (
   accommodationid = accommodationID,
   startDate,
   endDate,
-) => (dispatch) => {
-  return fetch(`/bookings/${accommodationid}/reserve/${startDate}&${endDate}`)
+) => dispatch => (
+  fetch(`/bookings/${accommodationid}/reserve/${startDate}&${endDate}`)
     .then(handleErrors)
     .then(res => res.json())
     .then((json) => {
-      json.availability = json.availability.map(val => new Date(`${val.date} Z`));
-      dispatch(fetchAvailabilitySuccess(json));
-      return json;
+      const availability = json.availability.reduce((acc, cv) => {
+        acc[formatDate(new Date(`${cv.date} Z`))] = true;
+        return acc;
+      }, {});
+      dispatch(fetchAvailabilitySuccess({ availability }));
+      return { availability };
     })
-    .catch(error => dispatch(fetchAccommodationsFailure(error)));
-};
+    .catch(error => dispatch(fetchAccommodationsFailure(error)))
+);

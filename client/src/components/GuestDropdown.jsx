@@ -99,7 +99,13 @@ const CloseButton = styled.button`
   }
 `;
 
-const GuestDropdown = ({ maxGuests, adults = 1, children = 0, infants = 0, handleDropdownClick }) => (
+const GuestDropdown = ({
+  maxGuests,
+  adults = 1,
+  children = 0,
+  infants = 0,
+  handleDropdownClick,
+}) => (
   <DropdownContainer>
     <AdultsContainer>
       <GuestLabelContainer>

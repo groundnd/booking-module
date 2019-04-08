@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
@@ -34,6 +35,7 @@ const UnavailableDay = styled(EmptyCell)`
   border: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
   text-decoration: line-through;
   color: ${theme.palette.primary[7]};
+  cursor: default;
 `;
 
 const CalendarTable = ({
@@ -53,10 +55,11 @@ const CalendarTable = ({
   }
   for (let j = 0; j < DateData[currentMonth].numDays; j += 1) {
     const date = formatDate(new Date(currentYear + 1900, currentMonth, j + firstDay));
-    console.log(date);
-    availability[date] ? (days.push(<UnavailableDay id={date}>{j + firstDay}</UnavailableDay>)) : (days.push(<AvailableDay id={date}>{j + firstDay}</AvailableDay>))
+    // eslint-disable-next-line no-unused-expressions
+    availability[date]
+      ? (days.push(<UnavailableDay id={date}>{j + firstDay}</UnavailableDay>))
+      : (days.push(<AvailableDay id={date}>{j + firstDay}</AvailableDay>));
   }
-  console.log(availability, days);
   const days1 = days.slice(0, 7);
   const days2 = days.slice(7, 14);
   const days3 = days.slice(14, 21);
@@ -64,23 +67,28 @@ const CalendarTable = ({
   const days5 = days.slice(28);
   return (
     <StyledCalendarTable>
-      <TableBody>
-        <tr>
-          {days1}
-        </tr>
-        <tr>
-          {days2}
-        </tr>
-        <tr>
-          {days3}
-        </tr>
-        <tr>
-          {days4}
-        </tr>
-        <tr>
-          {days5}
-        </tr>
-      </TableBody>
+      {Object.keys(availability).length
+        ? (
+          <TableBody>
+            <tr>
+              {days1}
+            </tr>
+            <tr>
+              {days2}
+            </tr>
+            <tr>
+              {days3}
+            </tr>
+            <tr>
+              {days4}
+            </tr>
+            <tr>
+              {days5}
+            </tr>
+          </TableBody>
+        )
+        : (<div />)
+      }
     </StyledCalendarTable>
   );
 };
