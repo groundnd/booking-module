@@ -45,7 +45,7 @@ const ChargeNotice = styled.span`
 class BookingForm extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchAccommodation());
+    dispatch(fetchAccommodation(window.location.pathname.split('/')[2]));
   }
 
   render() {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
@@ -33,7 +34,7 @@ const BottomBorder = styled.div`
   border-bottom: 1px solid #ebebeb;
 `;
 
-const PriceDDRow = ({ label, price, Total = false}) => (
+const PriceDDRow = ({ label, price, Total = false }) => (
   <PriceContainer>
     <PriceRowContainer>
       <PriceContainer>

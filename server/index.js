@@ -8,7 +8,7 @@ const app = express();
 const sequelize = require('../database/index');
 const Models = require('../database/models/index');
 
-app.use('/bookings', express.static(path.join(__dirname, '../client/dist')));
+app.use('/bookings/:accommodationid', express.static(path.join(__dirname, '../client/dist')));
 app.use(morgan('dev'));
 
 app.get('/bookings/:accommodationid/reserve', async (req, res) => {
