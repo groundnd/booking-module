@@ -205,7 +205,9 @@ const GuestDropdown = ({
       </GuestCountContainer>
     </ChildrenInfantsContainer>
     <FooterContainer>
-      <SubLabel>4 guests maximum. Infants don’t count toward the number of guests.</SubLabel>
+      <SubLabel>
+        {`${maxGuests} maximum. Infants don’t count toward the number of guests.`}
+      </SubLabel>
       <CloseButtonContainer>
         <CloseButton onClick={handleDropdownClick}>Close</CloseButton>
       </CloseButtonContainer>

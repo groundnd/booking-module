@@ -71,7 +71,7 @@ const CalendarTable = ({
   } else if (checkOutSelected) {
     let firstUnavail = false;
     const checkInDay = getCheckInDay(checkInDate);
-    for (let j = 1; j < DateData[currentMonth].numDays; j += 1) {
+    for (let j = 1; j <= DateData[currentMonth].numDays; j += 1) {
       const date = formatDate(new Date(currentYear + 1900, currentMonth, j));
       if (j > checkInDay && availability[date]) {firstUnavail = true;}
       if (j < checkInDay || availability[date] || date < today || firstUnavail) {

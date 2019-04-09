@@ -7,6 +7,7 @@ import CalendarContainerState from '../containers/Calendar';
 import GuestContainerState from '../containers/Guests';
 import { fetchAccommodation } from '../actions/AccommodationAvailabilityActions';
 import { toggleCalendar } from '../actions/Calendar';
+import PriceBreakout from '../containers/PriceBreakout';
 
 const CheckOutContainer = styled.div`
   display: flex;
@@ -65,6 +66,10 @@ class BookingForm extends Component {
               : ''
             }
             <GuestContainerState />
+            {checkInDate && checkOutDate
+              ? <PriceBreakout />
+              : null
+            }
             <Button>Book</Button>
           </CheckOutContainer>
           <ChargeContainer>
