@@ -26,10 +26,10 @@ export const fetchAccommodationsFailure = error => ({
   payload: { error },
 });
 
-export const fetchAccommodation = path => (
+export const fetchAccommodation = accommodationID => (
   (dispatch) => {
     dispatch(fetchAccommodationsBegin());
-    return fetch(path)
+    return fetch(`/bookings/${accommodationID}/reserve`)
       .then(handleErrors)
       .then(res => res.json())
       .then((json) => {

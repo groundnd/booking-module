@@ -47,10 +47,10 @@ const ChargeNotice = styled.span`
 class BookingForm extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    const accommodationID = Math.floor(Math.random() * 100);
-    const { protocol, hostname, pathname } = window.location;
-    const path = `${protocol}//${hostname}:${BookingModPort}/bookings/${pathname.split('/')[2] || accommodationID}/reserve`;
-    dispatch(fetchAccommodation(path));
+    const accommodationID = window.location.pathname.split('/')[2] || Math.floor(Math.random() * 100);
+    // const { protocol, hostname, pathname } = window.location;
+    // const path = `${protocol}//${hostname}:${BookingModPort}/bookings/${pathname.split('/')[2] || accommodationID}/reserve`;
+    dispatch(fetchAccommodation(accommodationID));
   }
 
   render() {
