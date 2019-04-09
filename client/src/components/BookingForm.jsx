@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import theme from './themes/default';
 import Dates from './Dates';
-import Guests from './Guests';
-import GuestDropdown from './GuestDropdown';
-import Calendar from './Calendar';
+import CalendarContainerState from '../containers/Calendar';
+import GuestContainerState from '../containers/Guests';
+import { fetchAccommodation } from '../actions/AccommodationAvailabilityActions';
+import { toggleCalendar } from '../actions/Calendar';
 
 const CheckOutContainer = styled.div`
   display: flex;
@@ -39,31 +42,54 @@ const ChargeNotice = styled.span`
   font-family: ${theme.fonts.primary};
 `;
 
-const DropDownContainer = styled.div`
-  display: block;
-  z-index: 2;
-  width: 100%;
-`;
+class BookingForm extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchAccommodation());
+  }
+
+  render() {
+    const { checkInDate, checkOutDate, toggleCalendar, checkInSelected, checkOutSelected } = this.props;
+    return (
+      <div id="bm-booking-form-container">
+        <form id="bm-booking-form">
+          <CheckOutContainer>
+            <Dates checkInDate={checkInDate} checkOutDate={checkOutDate} toggleCalendar={toggleCalendar} />
+            {checkInSelected || checkOutSelected
+              ? <CalendarContainerState />
+              : ''
+            }
+            <GuestContainerState />
+            <Button>Book</Button>
+          </CheckOutContainer>
+          <ChargeContainer>
+            <ChargeNotice>You won&apos;t be charged yet</ChargeNotice>
+          </ChargeContainer>
+        </form>
+      </div>
+    );
+  }
+}
 
 
-const BookingForm = () => (
-  <div id="bm-booking-form-container">
-    <form id="bm-booking-form">
-      <CheckOutContainer>
-        <Dates />
-        <Calendar />
-        <Guests />
-        <DropDownContainer>
-          {/* <GuestDropdown /> */}
-        </DropDownContainer>
-        <Button>Book</Button>
-      </CheckOutContainer>
-      <ChargeContainer>
-        <ChargeNotice>You won&apos;t be charged yet</ChargeNotice>
-      </ChargeContainer>
-    </form>
-  </div>
-);
+const mapStateToProps = state => ({
+  accommodation: state.accommodation,
+  availability: state.accommodation.availability,
+  checkInDate: state.calendar.checkInDate,
+  checkOutDate: state.calendar.checkOutDate,
+  checkInSelected: state.calendar.checkInSelected,
+  checkOutSelected: state.calendar.checkOutSelected,
+  loading: state.accommodation.loading,
+  error: state.accommodation.error,
+});
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleCalendar: () => {
+      dispatch(toggleCalendar());
+    },
+    dispatch,
+  };
+};
 
-export default BookingForm;
+export default connect(mapStateToProps, mapDispatchToProps)(BookingForm);

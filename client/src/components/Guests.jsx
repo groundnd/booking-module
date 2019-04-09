@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
+import GuestDropdown from './GuestDropdown';
 
 const GuestContainer = styled.div`
   width: 100%;
@@ -65,19 +67,36 @@ const GuestText = styled.span`
   font-family: ${theme.fonts.primary};
 `;
 
-const Guests = ({ guests, infants }) => (
+const DropDownContainer = styled.div`
+  display: block;
+  z-index: 2;
+  width: 100%;
+`;
+
+const Guests = ({
+  numGuests,
+  numAdults,
+  numChildren,
+  numInfants,
+  handleDropdownClick,
+  guestDropdown,
+  changeGuests,
+  selectGuests,
+  selectInfants,
+  maxGuests,
+}) => (
   <GuestContainer>
     <GuestLabel>Guests</GuestLabel>
-    <GuestButton>
+    <GuestButton onClick={handleDropdownClick}>
       <GuestTextContainer>
         <GuestHighlighter>
-          <GuestText id="bm-guest-label">
-            {`${guests || 1} Guest${guests > 1 ? 's' : ''},`}
+          <GuestText id="bm-guest-label" onClick={() => selectGuests()}>
+            {`${numGuests || 1} Guest${numGuests > 1 ? 's' : ''}`}
           </GuestText>
         </GuestHighlighter>
         <GuestHighlighter>
-          <GuestText id="bm-infant-label">
-            {infants ? (` ${infants} Infant${infants > 1 ? 's' : ''}`) : ''}
+          <GuestText id="bm-infant-label" onClick={() => selectInfants()}>
+            {numInfants ? (`, ${numInfants} Infant${numInfants > 1 ? 's' : ''}`) : ''}
           </GuestText>
         </GuestHighlighter>
       </GuestTextContainer>
@@ -85,6 +104,21 @@ const Guests = ({ guests, infants }) => (
         <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />
       </GuestArrow>
     </GuestButton>
+    <DropDownContainer>
+      {guestDropdown
+        ? (
+          <GuestDropdown
+            handleDropdownClick={handleDropdownClick}
+            numGuests={numGuests}
+            numAdults={numAdults}
+            numChildren={numChildren}
+            numInfants={numInfants}
+            changeGuests={changeGuests}
+            maxGuests={maxGuests}
+          />
+        )
+        : null}
+    </DropDownContainer>
   </GuestContainer>
 );
 

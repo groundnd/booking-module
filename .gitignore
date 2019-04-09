@@ -2,5 +2,6 @@ node_modules
 .eslintrc.js
 database/config
 webpack.config.js
-BookingModule.bundle.js
-tests
+client/dist/BookingModule.bundle.js
+tests/coverage
+.eslintignore

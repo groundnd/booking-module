@@ -20,8 +20,8 @@ const Reviews = ({ numReviews }) => (
   // to-do: wrap stars and review label in button to allow navigation on-screen
   <ReviewContainer>
     <Stars />
-    <ReviewLabel> 
-      {numReviews || 155}
+    <ReviewLabel>
+      { ` ${numReviews || 155}` }
     </ReviewLabel>
   </ReviewContainer>
 );

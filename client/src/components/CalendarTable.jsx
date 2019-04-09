@@ -1,6 +1,9 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import theme from './themes/default';
+import { DateData, formatDate, getCheckInDay } from '../helpers/Dates';
 
 // Todo: fix spacing/margins
 
@@ -26,25 +29,73 @@ const EmptyCell = styled.td`
 
 const AvailableDay = styled(EmptyCell)`
   border: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
+  color: ${theme.palette.primary[1]};
 `;
 
 const UnavailableDay = styled(EmptyCell)`
   border: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
+  text-decoration: line-through;
+  color: ${theme.palette.primary[7]};
+  cursor: default;
 `;
 
-const CalendarTable = () => {
-  let days = [];
-  for (let i = 0; i < 4; i += 1) {
+const CalendarTable = ({
+  currentMonth = 3,
+  currentYear = 119,
+  availability = {},
+  checkInDate,
+  lastAvailable,
+  minStay,
+  checkInSelected,
+  checkOutSelected,
+  changeCheckIn,
+  changeCheckOut,
+}) => {
+  const firstDay = new Date(`${currentYear + 1900} ${DateData[currentMonth].month} 1`).getDay();
+  const days = [];
+  const today = formatDate(Date.now());
+
+  for (let i = 0; i < firstDay; i += 1) {
     days.push(<EmptyCell />);
   }
-  for (let j = 0; j < 27; j += 1) {
-    j % 2 === 0 ? (days.push(<AvailableDay>{j + 4}</AvailableDay>)) : (days.push(<UnavailableDay>{j + 4}</UnavailableDay>));
+  if (checkInSelected) {
+    for (let j = 1; j <= DateData[currentMonth].numDays; j += 1) {
+      const date = formatDate(new Date(currentYear + 1900, currentMonth, j));
+      // eslint-disable-next-line no-unused-expressions
+      availability[date]
+        ? (days.push(<UnavailableDay id={date}>{j}</UnavailableDay>))
+        : date < today
+          ? (days.push(<UnavailableDay id={date}>{j}</UnavailableDay>))
+          : (days.push(<AvailableDay id={date} onClick={e => changeCheckIn(e.target.id)}>{j}</AvailableDay>));
+    }
+  } else if (checkOutSelected) {
+    let day = 1;
+    let firstUnavail = false;
+    const checkInDay = getCheckInDay(checkInDate);
+    while (day < DateData[currentMonth].numDays) {
+      const date = formatDate(new Date(currentYear + 1900, currentMonth, day));
+      if (day > checkInDay && availability[date]) {firstUnavail = true;}
+      if (day < checkInDay || availability[date] || date < today || firstUnavail) {
+        days.push(<UnavailableDay id={date}>{day}</UnavailableDay>);
+      } else {
+        (days.push(<AvailableDay id={date} onClick={e => changeCheckOut(e.target.id)}>{day}</AvailableDay>));
+      }
+      day += 1;
+    }
   }
-  let days1 = days.slice(0, 7);
-  let days2 = days.slice(7, 14);
-  let days3 = days.slice(14, 21);
-  let days4 = days.slice(21, 28);
-  let days5 = days.slice(28);
+  
+  const days1 = days.slice(0, 7);
+  const days2 = days.slice(7, 14);
+  const days3 = days.slice(14, 21);
+  const days4 = days.slice(21, 28);
+  let days5;
+  let days6;
+  if (days.length > 34) {
+    days5 = days.slice(28, 35);
+    days6 = days.slice(35);
+  } else {
+    days5 = days.slice(28);
+  }
   return (
     <StyledCalendarTable>
       <TableBody>
@@ -63,6 +114,11 @@ const CalendarTable = () => {
         <tr>
           {days5}
         </tr>
+        {
+          days.length > 34
+            ? (<tr>{days6}</tr>)
+            : ''
+        }
       </TableBody>
     </StyledCalendarTable>
   );
