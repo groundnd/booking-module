@@ -9,6 +9,8 @@ import { fetchAccommodation } from '../actions/AccommodationAvailabilityActions'
 import { toggleCalendar } from '../actions/Calendar';
 import PriceBreakout from '../containers/PriceBreakout';
 
+const BookingModPort = require('../../../server/.env.js');
+
 const CheckOutContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -45,7 +47,10 @@ const ChargeNotice = styled.span`
 class BookingForm extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchAccommodation(window.location.pathname.split('/')[2]));
+    const accommodationID = Math.floor(Math.random() * 100);
+    const { protocol, hostname, pathname } = window.location;
+    const path = `${protocol}//${hostname}:${BookingModPort}/bookings/${pathname.split('/')[2] || accommodationID}/reserve`;
+    dispatch(fetchAccommodation(path));
   }
 
   render() {

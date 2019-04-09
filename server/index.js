@@ -2,14 +2,20 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const dateFormatter = require('./helpers');
+const port = require('./.env.js');
 
-const port = process.env.PORT || 3003;
 const app = express();
 const sequelize = require('../database/index');
 const Models = require('../database/models/index');
 
 app.use('/bookings/:accommodationid', express.static(path.join(__dirname, '../client/dist')));
 app.use(morgan('dev'));
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 app.get('/bookings/:accommodationid/reserve', async (req, res) => {
   const accommodation = await Models.Accommodation.findAll({

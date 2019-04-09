@@ -5,8 +5,6 @@ export const FETCH_ACCOMMODATIONS_SUCCESS = 'FETCH_ACCOMMODATIONS_SUCCESS';
 export const FETCH_ACCOMMODATIONS_FAILURE = 'FETCH_ACCOMMODATIONS_FAILURE';
 export const FETCH_AVAILABILITY_SUCCESS = 'FETCH_AVAILABILITY_SUCCESS';
 
-const accommodationID = Math.floor(Math.random() * 100);
-
 function handleErrors(response) {
   if (!response.ok) {
     throw Error(response.statusText);
@@ -28,12 +26,10 @@ export const fetchAccommodationsFailure = error => ({
   payload: { error },
 });
 
-export const fetchAccommodation = (
-  accommodationid = accommodationID,
-) => (
+export const fetchAccommodation = path => (
   (dispatch) => {
     dispatch(fetchAccommodationsBegin());
-    return fetch(`/bookings/${accommodationid}/reserve`)
+    return fetch(path)
       .then(handleErrors)
       .then(res => res.json())
       .then((json) => {
