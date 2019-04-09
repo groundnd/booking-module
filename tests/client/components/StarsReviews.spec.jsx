@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 
 // Components
 import { Stars, FullStar, HalfStar, EmptyStar } from '../../../client/src/components/Stars';
-import { Reviews, ReviewLabel } from '../../../client/src/components/Reviews';
+import { Reviews } from '../../../client/src/components/Reviews';
 
 /*
 
@@ -30,10 +30,10 @@ describe('Stars', () => {
   let expectedStars = [];
 
 
-  test('should update props with score', () => {
-    expect('score' in wrapper.props()).toEqual(false);
-    wrapper.setProps({ score: 5 });
-    expect(wrapper.prop('score')).toEqual(5);
+  test('should update props with rating', () => {
+    expect('rating' in wrapper.props()).toEqual(false);
+    wrapper.setProps({ rating: 5 });
+    expect(wrapper.prop('rating')).toEqual(5);
   });
 
   test('should render 5 stars correctly', () => {
@@ -45,7 +45,7 @@ describe('Stars', () => {
   });
 
   test('should render 3.5 stars correctly', () => {
-    wrapper.setProps({ score: 3.5 });
+    wrapper.setProps({ rating: 3.5 });
 
     for (let i = 0; i < 3; i += 1) {
       expectedStars.push(FullStar());
@@ -58,7 +58,7 @@ describe('Stars', () => {
   });
 
   test('should render 0 stars correctly', () => {
-    wrapper.setProps({ score: 0 });
+    wrapper.setProps({ rating: 0 });
 
     for (let i = 0; i < 5; i += 1) {
       expectedStars.push(EmptyStar());

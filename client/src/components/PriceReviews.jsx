@@ -9,10 +9,20 @@ const LineBreak = styled.div`
   border-bottom: ${theme.borders.width} ${theme.borders.style} ${theme.borders.color};
 `;
 
-const PriceReview = () => (
+const PriceReview = ({
+  price,
+  additionalGuestFee,
+  overGuestThreshold,
+  numReviews,
+  rating,
+}) => (
   <div id="bm-price-review-container">
-    <PriceLabel />
-    <Reviews />
+    <PriceLabel
+      price={price}
+      additionalGuestFee={additionalGuestFee}
+      overGuestThreshold={overGuestThreshold}
+    />
+    <Reviews numReviews={numReviews} rating={rating} />
     <LineBreak />
   </div>
 );
