@@ -51,9 +51,9 @@ export const fetchAvailabilitySuccess = ({ availability }) => ({
 export const fetchAvailability = (
   startDate,
   endDate,
-  accommodationid = accommodationID,
+  accommodationID,
 ) => dispatch => (
-  fetch(`/bookings/${accommodationid}/reserve/${startDate}&${endDate}`)
+  fetch(`/bookings/${accommodationID}/reserve/${startDate}&${endDate}`)
     .then(handleErrors)
     .then(res => res.json())
     .then((json) => {
