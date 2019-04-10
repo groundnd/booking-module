@@ -10,4 +10,6 @@ const db = new Sequelize(databaseName, 'root', pw, {
   logging: false,
 });
 
+db.query('CREATE DATABASE IF NOT EXISTS bookings').then(() => console.log('Database created'));
+
 module.exports = db;

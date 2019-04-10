@@ -2,7 +2,6 @@ const faker = require('faker');
 const db = require('./index');
 const Models = require('./models/index');
 
-
 const generateGuestData = () => {
   const guestData = [];
   for (let i = 0; i < 100; i += 1) {
