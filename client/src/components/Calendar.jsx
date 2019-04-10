@@ -76,7 +76,8 @@ const Calendar = ({
     <CalendarHeader>
       <ButtonContainer onClick={() => {
         const lMo = prevMonth(currentMonth, currentYear);
-        fetchAvailability(formatDate(new Date(lMo[1] + 1900, lMo[0], 1)), formatDate(new Date(currentYear + 1900, currentMonth, 1)));
+        const accommodationID = window.location.pathname.split('/')[2] || Math.floor(Math.random() * 100);
+        fetchAvailability(formatDate(new Date(lMo[1] + 1900, lMo[0], 1)), formatDate(new Date(currentYear + 1900, currentMonth, 1)), accommodationID);
         changeMonth('decrease'); 
       }}
       >
@@ -90,7 +91,8 @@ const Calendar = ({
       <ButtonContainer onClick={() => {
         const nxtMoStart = nextMonth(currentMonth, currentYear);
         const nxtMoEnd = nextMonth(nxtMoStart[0], nxtMoStart[1]);
-        fetchAvailability(formatDate(new Date(nxtMoStart[1] + 1900, nxtMoStart[0], 1)), formatDate(new Date(nxtMoEnd[1] + 1900, nxtMoEnd[0], 1)));
+        const accommodationID = window.location.pathname.split('/')[2] || Math.floor(Math.random() * 100);
+        fetchAvailability(formatDate(new Date(nxtMoStart[1] + 1900, nxtMoStart[0], 1)), formatDate(new Date(nxtMoEnd[1] + 1900, nxtMoEnd[0], 1)), accommodationID);
         changeMonth('increase'); 
       }}
       >

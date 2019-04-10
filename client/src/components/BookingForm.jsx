@@ -48,6 +48,7 @@ class BookingForm extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     const accommodationID = window.location.pathname.split('/')[2] || Math.floor(Math.random() * 100);
+
     // const { protocol, hostname, pathname } = window.location;
     // const path = `${protocol}//${hostname}:${BookingModPort}/bookings/${pathname.split('/')[2] || accommodationID}/reserve`;
     dispatch(fetchAccommodation(accommodationID));
@@ -96,6 +97,8 @@ const mapStateToProps = state => ({
   checkOutSelected: state.calendar.checkOutSelected,
   loading: state.accommodation.loading,
   error: state.accommodation.error,
+  currentMonth: state.calendar.currentMonth,
+  currentYear: state.calendar.currentYear,
 });
 
 const mapDispatchToProps = dispatch => ({
