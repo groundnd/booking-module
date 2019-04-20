@@ -15,7 +15,7 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       references: {
         model: 'accommodation',
-        key: 'id',
+        key: 'id'
       },
     },
     guest_id: {
@@ -23,7 +23,7 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       references: {
         model: 'guests',
-        key: 'id',
+        key: 'id'
       },
     },
     total_guests: {
@@ -43,12 +43,13 @@ module.exports = (sequelize, type) => {
       defaultValue: 0,
     },
   },
+
   {
     indexes: [
       {
         unique: true,
         fields: ['accommodation_id', 'date'],
       },
-    ],
+    ], timestamps: false
   });
 };
