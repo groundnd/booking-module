@@ -60,5 +60,5 @@ module.exports = (sequelize, type) => {
     above_avg_views: type.BOOLEAN,
     rare_find: type.BOOLEAN,
     hot_item: type.BOOLEAN,
-  });
+  }, {timestamps: false});
 };
