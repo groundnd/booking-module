@@ -8,7 +8,7 @@ const csv = require('csv');
 const readline = require('readline');
 const LineByLineReader = require('line-by-line');
 
-const records = 10000000;
+const records = 10000;
 
 const generateGuestData = () => {
   const guestData = [];
@@ -111,7 +111,6 @@ const generateReservationsData = () => {
   return reservationData;
 };
 
-var counter = 0;
 const gigaSeed = (writer, times, data, callback) => {
   let i = times;
   let write = () => {
@@ -135,13 +134,13 @@ const gigaSeed = (writer, times, data, callback) => {
 };
 
 const guestData = () => { 
-  return {name: faker.name.findName()};
+  return {id: counter, name: faker.name.findName()};
 };
 
 const accommodationData = () => {
   const includeAddlFields = true;
   const newAccData = {
-    // id: counter,
+    id: counter,
     price_per_day: faker.finance.amount(60, 300, 2),
     cleaning_fee: faker.finance.amount(20, 80, 2),
     accommodations_tax: faker.finance.amount(0, 0.1, 2),
@@ -152,11 +151,9 @@ const accommodationData = () => {
     number_viewing_listing: faker.random.number({ min: 0, max: 600 }),
     availability_last_updated: faker.date.between('2019-01-01', '2019-03-28').toISOString(),
   };
-
-  // price_per_day,cleaning_fee,accommodations_tax,general_tax,rating_score,number_of_ratings,max_guests,number_viewing_listing,availability_last_updated,above_avg_views,rare_find,hot_item,guest_threshold,additional_guest_fee,minimum_stay_length,availability_end_date 
-
+  
   Object.assign(newAccData, getSpecial());
-
+  
   if (includeAddlFields) {
     const addlFields = {
       guest_threshold: faker.random.number({ min: 2, max: 5 }),
@@ -171,6 +168,7 @@ const accommodationData = () => {
 
 const reservationsData = () => {  
   const resData = {
+    id: counter,
     date: faker.date.between('2019-04-01', '2022-01-01').toISOString(),
     accommodation_id: faker.random.number({ min: 1, max: records }),
     guest_id: faker.random.number({ min: 1, max: records}),
@@ -182,40 +180,58 @@ const reservationsData = () => {
   return resData;
 };
 
+var counter = 0;
 var streamGuestWrite = fs.createWriteStream('guestData.csv');
+streamGuestWrite.write(Object.keys(guestData()).join(',') + '\n');
 gigaSeed(streamGuestWrite, records, guestData, () => {
   console.log('Done Saving Guest Data');
-  zipFile('guestData');
+  // zipFile('guestData');
+  
   counter = 0;
-
   var streamAccommodationsWrite = fs.createWriteStream('accommodationData.csv');
   streamAccommodationsWrite.write(Object.keys(accommodationData()).join(',') + '\n');
   gigaSeed(streamAccommodationsWrite, records, accommodationData, () => {
     console.log('Done Saving Accommodation Data');
-    zipFile('accommodationData');
+    // zipFile('accommodationData');
     
+    counter = 0;
     var streamReservationWrite = fs.createWriteStream('reservationData.csv');
     streamReservationWrite.write(Object.keys(reservationsData()).join(',') + '\n');
     gigaSeed(streamReservationWrite, records, reservationsData, () => {
       console.log('Done Saving Reservation Data!');
-      zipFile('reservationData');
+      // zipFile('reservationData');
       
-      Models.Accommodation.hasMany(Models.Guest);
-      Models.Accommodation.hasMany(Models.Reservation);
-      db.drop();
       db.sync({ force: true, match: /bookings$/ })
         .then(() => {
-          db.query("COPY guests(name) FROM '/Users/muhammadshehu/Desktop/SHEHU/Hack_Reactor/W8/booking_module/guestData.csv' DELIMITER ',' CSV HEADER ");
-          db.query(
+          var guestCopy = db.query("COPY guests(idNo, name) FROM '/Users/muhammadshehu/Desktop/SHEHU/Hack_Reactor/W8/booking_module/guestData.csv' DELIMITER ',' CSV HEADER ");
+          var accommodationCopy = db.query(
             "COPY "+
-            "accommodation (price_per_day,cleaning_fee,accommodations_tax,general_tax,rating_score,number_of_ratings,max_guests,number_viewing_listing,availability_last_updated,above_avg_views,rare_find,hot_item,guest_threshold,additional_guest_fee,minimum_stay_length,availability_end_date)" + 
+            "accommodation (idNo, price_per_day,cleaning_fee,accommodations_tax,general_tax,rating_score,number_of_ratings,max_guests,number_viewing_listing,availability_last_updated,above_avg_views,rare_find,hot_item,guest_threshold,additional_guest_fee,minimum_stay_length,availability_end_date)" + 
             "FROM '/Users/muhammadshehu/Desktop/SHEHU/Hack_Reactor/W8/booking_module/accommodationData.csv' DELIMITER ',' CSV HEADER ");
-          db.query(
+          var reservationsCopy = db.query(
             "COPY " + 
-            "reservations(date,accommodation_id,guest_id,total_adults,total_children,total_infants,total_guests) " + 
-            "FROM '/Users/muhammadshehu/Desktop/SHEHU/Hack_Reactor/W8/booking_module/reservationData.csv' DELIMITER ',' CSV HEADER ");
+            "reservations(idNo, date,accommodation_id,guest_id,total_adults,total_children,total_infants,total_guests) " + 
+            "FROM '/Users/muhammadshehu/Desktop/SHEHU/Hack_Reactor/W8/booking_module/reservationData.csv' DELIMITER ',' CSV HEADER ")
+            .catch(function(err) {
+              console.log('Duplicate clash...');
+            });
+          return [guestCopy, accommodationCopy, reservationsCopy];
         })
-        .then(() => console.log('Seeded Database successfully'))
+        .then(result => {
+          Promise.all(result).then(() => { console.log('Seeded Database successfully'); });
+        })
+        .then(() => {
+          db.query(
+            `ALTER TABLE guests
+            ADD PRIMARY KEY USING INDEX idNo`);
+          db.query(
+            `ALTER TABLE accommodation
+            ADD PRIMARY KEY USING INDEX idNo`); 
+          db.query(
+            `ALTER TABLE reservations
+            ADD PRIMARY KEY USING INDEX idNo`);
+        })
+
         .catch(err => (
           console.log(err)));
     });
@@ -241,15 +257,6 @@ const unZipFile = (file) => {
   rStream   
     .pipe(gunzip)  
     .pipe(process.stdout);
-}
-
-// db.drop();
-// db.sync({ force: true, match: /bookings$/ })
-//   .then(() => Models.Guest.bulkCreate(generateGuestData()))
-//   .then(() => Models.Accommodation.bulkCreate(generateAccommodationData()))
-//   .then(() => Models.Reservation.bulkCreate(generateReservationsData(), { ignoreDuplicates: true }))
-//   .then(() => console.log('Seeded Database successfully'))
-//   .catch(err => (
-//     console.log(err)));
+};
 
 
