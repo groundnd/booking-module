@@ -25,7 +25,7 @@ Abode.ly 's booking component provides a user-friendly experience to browsing th
   Then, browse to localhost at port 3003 with a path of '/bookings/num', where num is the accommodation id you want to review. Note: the maximum accommodation id that will be served is 100.
 
   ```sh
-  localhost:30003/bookings/1
+  localhost:3003/bookings/1
   ```
 
 ## CRUD API
