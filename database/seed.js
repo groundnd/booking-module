@@ -8,16 +8,7 @@ const csv = require('csv');
 const readline = require('readline');
 const LineByLineReader = require('line-by-line');
 
-const records = 10000;
-
-const generateGuestData = () => {
-  const guestData = [];
-  for (let i = 0; i < records; i += 1) {
-    guestData[i] = { name: faker.name.findName() };
-  }
-  return JSON.stringify(guestData);
-};
-
+const records = 10000000;
 
 const getRating = () => {
   const scores = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
@@ -46,81 +37,15 @@ const getSpecial = () => {
   return extraRenders[faker.random.number({ min: 0, max: 3 })]
 }
 
-const generateAccommodationData = () => {
-  const accommodationData = [];
-  for (let i = 0; i < records; i += 1) {
-    const includeAddlFields = true;
-    const newAccData = {
-      price_per_day: faker.finance.amount(60, 300, 2),
-      cleaning_fee: faker.finance.amount(20, 80, 2),
-      accommodations_tax: faker.finance.amount(0, 0.1, 2),
-      general_tax: faker.finance.amount(0, 0.05, 2),
-      rating_score: getRating(),
-      number_of_ratings: faker.random.number({ min: 0, max: 1000 }),
-      max_guests: faker.random.number({ min: 1, max: 11 }),
-      number_viewing_listing: faker.random.number({ min: 0, max: 600 }),
-      availability_last_updated: faker.date.between('2019-01-01', '2019-03-28'),
-    };
-
-    Object.assign(newAccData, getSpecial());
-
-    if (includeAddlFields) {
-      const addlFields = {
-        guest_threshold: faker.random.number({ min: 2, max: 5 }),
-        additional_guest_fee: faker.finance.amount(10, 30, 2),
-        minimum_stay_length: faker.random.number({ min: 2, max: 5}),
-        availability_end_date: faker.date.between('2020-04-01', '2022-01-01')
-      };
-      Object.assign(newAccData, addlFields);
-    }
-
-    accommodationData.push(newAccData);
-  }
-  return JSON.stringify(accommodationData);
-};
-
-
-const generateReservationsData = () => {
-  const reservationData = [];
-  
-  for (let i = 0; i < 10000000; i += 1) {
-    const resData = {
-      date: faker.date.between('2019-04-01', '2019-10-01'),
-      accommodation_id: faker.random.number({ min: 1, max: records}),
-      guest_id: faker.random.number({ min: 1, max: records}),
-      total_adults: faker.random.number({ min: 2, max: 5 }),
-      total_children: faker.random.number({ min: 2, max: 5 }),
-      total_infants: faker.random.number({ min: 2, max: 5 }),
-    }
-    resData.total_guests = resData.total_adults + resData.total_children;
-    // reservationData.push(resData);
-  }
-  
-  for (let i = 0; i < 10000000; i += 1) {
-    const resData = {
-      date: faker.date.between('2019-04-01', '2022-01-01'),
-      accommodation_id: faker.random.number({ min: 1, max: records }),
-      guest_id: faker.random.number({ min: 1, max: records}),
-      total_adults: faker.random.number({ min: 2, max: 5 }),
-      total_children: faker.random.number({ min: 2, max: 5 }),
-      total_infants: faker.random.number({ min: 2, max: 5 }),
-    }
-    resData.total_guests = resData.total_adults + resData.total_children;
-    // reservationData.push(resData);
-  }
-  return reservationData;
-};
 
 const gigaSeed = (writer, times, data, callback) => {
   let i = times;
   let write = () => {
     let ok = true;
-    // writer.write(Object.keys(data()).join(',') + '\n');
     do {
       i--;
       counter++;
       if (i === 0) {
-        // console.log(Object.keys(data()).map(element => data()[element]).join(','));
         writer.write(Object.keys(data()).map(element => data()[element]).join(',') + '\n', callback);
       } else {
         ok = writer.write(Object.keys(data()).map(element => data()[element]).join(',') + '\n');
@@ -168,8 +93,8 @@ const accommodationData = () => {
 
 const reservationsData = () => {  
   const resData = {
-    id: counter,
-    date: faker.date.between('2019-04-01', '2022-01-01').toISOString(),
+    id: counter + 50000001,
+    date: faker.date.between('2019-04-01', '2022-07-01').toISOString(),
     accommodation_id: faker.random.number({ min: 1, max: records }),
     guest_id: faker.random.number({ min: 1, max: records}),
     total_adults: faker.random.number({ min: 2, max: 5 }),
@@ -184,56 +109,23 @@ var counter = 0;
 var streamGuestWrite = fs.createWriteStream('guestData.csv');
 streamGuestWrite.write(Object.keys(guestData()).join(',') + '\n');
 gigaSeed(streamGuestWrite, records, guestData, () => {
-  console.log('Done Saving Guest Data');
+  console.log('Done Saving Guest Data!');
   // zipFile('guestData');
   
   counter = 0;
   var streamAccommodationsWrite = fs.createWriteStream('accommodationData.csv');
   streamAccommodationsWrite.write(Object.keys(accommodationData()).join(',') + '\n');
   gigaSeed(streamAccommodationsWrite, records, accommodationData, () => {
-    console.log('Done Saving Accommodation Data');
+    console.log('Done Saving Accommodation Data!');
     // zipFile('accommodationData');
     
     counter = 0;
     var streamReservationWrite = fs.createWriteStream('reservationData.csv');
     streamReservationWrite.write(Object.keys(reservationsData()).join(',') + '\n');
-    gigaSeed(streamReservationWrite, records, reservationsData, () => {
+    gigaSeed(streamReservationWrite, records * 5, reservationsData, () => {
       console.log('Done Saving Reservation Data!');
       // zipFile('reservationData');
       
-      db.sync({ force: true, match: /bookings$/ })
-        .then(() => {
-          var guestCopy = db.query("COPY guests(idNo, name) FROM '/Users/muhammadshehu/Desktop/SHEHU/Hack_Reactor/W8/booking_module/guestData.csv' DELIMITER ',' CSV HEADER ");
-          var accommodationCopy = db.query(
-            "COPY "+
-            "accommodation (idNo, price_per_day,cleaning_fee,accommodations_tax,general_tax,rating_score,number_of_ratings,max_guests,number_viewing_listing,availability_last_updated,above_avg_views,rare_find,hot_item,guest_threshold,additional_guest_fee,minimum_stay_length,availability_end_date)" + 
-            "FROM '/Users/muhammadshehu/Desktop/SHEHU/Hack_Reactor/W8/booking_module/accommodationData.csv' DELIMITER ',' CSV HEADER ");
-          var reservationsCopy = db.query(
-            "COPY " + 
-            "reservations(idNo, date,accommodation_id,guest_id,total_adults,total_children,total_infants,total_guests) " + 
-            "FROM '/Users/muhammadshehu/Desktop/SHEHU/Hack_Reactor/W8/booking_module/reservationData.csv' DELIMITER ',' CSV HEADER ")
-            .catch(function(err) {
-              console.log('Duplicate clash...');
-            });
-          return [guestCopy, accommodationCopy, reservationsCopy];
-        })
-        .then(result => {
-          Promise.all(result).then(() => { console.log('Seeded Database successfully'); });
-        })
-        .then(() => {
-          db.query(
-            `ALTER TABLE guests
-            ADD PRIMARY KEY USING INDEX idNo`);
-          db.query(
-            `ALTER TABLE accommodation
-            ADD PRIMARY KEY USING INDEX idNo`); 
-          db.query(
-            `ALTER TABLE reservations
-            ADD PRIMARY KEY USING INDEX idNo`);
-        })
-
-        .catch(err => (
-          console.log(err)));
     });
   });  
 });
