@@ -1,14 +1,19 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'muhammadshehu',
-  host: 'localhost',
+  user: process.env.DB_HOST || 'muhammadshehu',
+  host: process.env.DB_USER || 'localhost',
+  password: process.env.DB_PASS,
   database: 'bookings'
 });
 
 pool.on('error', (err, client) => {
   console.error('Unexpected error on idle client', err);
   process.exit(-1);
+});
+
+pool.on('connect', (err, client) => {
+  console.log('We are in the db Captain!');
 });
 
 module.exports = {
