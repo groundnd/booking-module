@@ -10,3 +10,4 @@ tests/coverage
 newrelic.js
 *.log
 groundnd.pem
+.env
