@@ -9,3 +9,4 @@ tests/coverage
 *.csv.gz
 newrelic.js
 *.log
+groundnd.pem
