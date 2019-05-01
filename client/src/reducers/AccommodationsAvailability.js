@@ -25,7 +25,7 @@ export default function accommodationReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        ...action.payload.accommodation[0],
+        ...action.payload.accommodation,
         availability: action.payload.availability,
       };
 

@@ -5,3 +5,7 @@ webpack.config.js
 client/dist/BookingModule.bundle.js
 tests/coverage
 .eslintignore
+*.csv
+*.csv.gz
+newrelic.js
+*.log

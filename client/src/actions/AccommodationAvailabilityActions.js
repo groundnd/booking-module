@@ -29,14 +29,15 @@ export const fetchAccommodationsFailure = error => ({
 export const fetchAccommodation = accommodationID => (
   (dispatch) => {
     dispatch(fetchAccommodationsBegin());
-    return fetch(`/bookings/${accommodationID}/reserve`)
+    return fetch(`/bookings/${accommodationID}`)
       .then(handleErrors)
       .then(res => res.json())
       .then((json) => {
-        const availability = json.availability.reduce((acc, cv) => {
-          acc[formatDate(new Date(`${cv.date} Z`))] = true;
-          return acc;
-        }, {});
+        // const availability = json.availability.reduce((acc, cv) => {
+        //   acc[formatDate(new Date(`${cv.date} Z`))] = true;
+        //   return acc;
+        // }, {});
+        const availability = {};
         dispatch(fetchAccommodationsSuccess({ accommodation: json.accommodation, availability }));
         return { accommodation: json.accommodation, availability };
       })
@@ -53,7 +54,7 @@ export const fetchAvailability = (
   endDate,
   accommodationID,
 ) => dispatch => (
-  fetch(`/bookings/${accommodationID}/reserve/${startDate}&${endDate}`)
+  fetch(`/bookings/${accommodationID}/${startDate}&${endDate}`)
     .then(handleErrors)
     .then(res => res.json())
     .then((json) => {

@@ -45,11 +45,12 @@ module.exports = (sequelize, type) => {
   },
 
   {
-    indexes: [
-      {
-        unique: true,
-        fields: ['accommodation_id', 'date'],
-      },
-    ], timestamps: false
+    // indexes: [
+    //   {
+    //     unique: true,
+    //     fields: ['accommodation_id', 'date'],
+    //   },
+    // ],
+    timestamps: false
   });
 };
