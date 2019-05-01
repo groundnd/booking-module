@@ -1,4 +1,5 @@
 require('newrelic');
+require('dotenv').config();
 const express = require('express');
 const redis = require("redis");
 const morgan = require('morgan');
