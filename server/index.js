@@ -8,8 +8,8 @@ const dateFormatter = require('./helpers');
 const port = require('./.env.js');
 const postgres = require('../database/postgres/index.js');
 const { promisify } = require('util');
+const compression = require('compression')
 
-const app = express();
 const client = redis.createClient();
 const sequelize = require('../database/index');
 const Models = require('../database/models/index');
