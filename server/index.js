@@ -13,6 +13,7 @@ const compression = require('compression')
 const client = redis.createClient();
 const sequelize = require('../database/index');
 const Models = require('../database/models/index');
+const app = express();
 const getRedisAsync = promisify(client.get).bind(client);
 const setRedisAsync = promisify(client.setex).bind(client);
 
