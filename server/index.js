@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 });
 
 
-app.get('/bookings/:accommodationid/:startDate&:endDate', (req, res) => {
+app.get('/bookings/:accommodationid/:startDate&:endDate', async (req, res) => {
   const start = new Date(req.params.startDate);
   const current = new Date(req.params.endDate);
   
@@ -36,7 +36,7 @@ app.get('/bookings/:accommodationid/:startDate&:endDate', (req, res) => {
   
 });
 
-app.get('/bookings/:accommodationid', (req, res) => {
+app.get('/bookings/:accommodationid', async (req, res) => {
   const accommodation = await postgres.getAccommodation(req.params.accommodationid);
   const now = new Date();
   let current;
