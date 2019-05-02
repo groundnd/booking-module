@@ -14,7 +14,7 @@ const client = redis.createClient();
 const sequelize = require('../database/index');
 const Models = require('../database/models/index');
 const getRedisAsync = promisify(client.get).bind(client);
-const setRedisAsync = promisify(client.set).bind(client);
+const setRedisAsync = promisify(client.setex).bind(client);
 
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 app.use('/:roomid', express.static(path.join(__dirname, '../client/dist')));
@@ -38,7 +38,7 @@ app.get('/bookings/:accommodationid/:startDate&:endDate', (req, res) => {
     } else {
       const availability = await postgres.getReservation(req.params.accommodationid, dateFormatter(start), dateFormatter(current));
       res.send(JSON.stringify({ availability }));
-      setRedisAsync(`${req.params.accommodationid}-reservation`, JSON.stringify({ availability }))
+      setRedisAsync(`${req.params.accommodationid}-reservation`, 3600, JSON.stringify({ availability }))
     }
   })
   
@@ -50,7 +50,7 @@ app.get('/bookings/:accommodationid', (req, res) => {
   .then(async (result) => {
     if (result) {
       res.send(result);
-    } else { 
+    } else {
       const accommodation = await postgres.getAccommodation(req.params.accommodationid);
       const now = new Date();
       let current;
@@ -62,7 +62,7 @@ app.get('/bookings/:accommodationid', (req, res) => {
       const availability = await postgres.getReservation(req.params.accommodationid, dateFormatter(now), dateFormatter(current));
       // console.log(availability);
       !availability ? res.send(JSON.stringify({ accommodation, availability: {} })) : res.send(JSON.stringify({ accommodation, availability }));
-      setRedisAsync(`${req.params.accommodationid}-accommodation`, JSON.stringify({ accommodation, availability }))
+      setRedisAsync(`${req.params.accommodationid}-accommodation`, 3600, JSON.stringify({ accommodation, availability }))
     }
   })
 });
